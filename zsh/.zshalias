@@ -1,0 +1,32 @@
+
+## Aliases.
+alias colordiff=~/bin/colordiff
+##alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+alias sudo="sudo "
+alias reload-shell="exec /proc/self/exe --login"
+if command -v exa >/dev/null 2>&1; then
+  alias ls="exa"
+  alias ll="exa -l"
+  alias lll="exa -la"
+else
+  alias ls="LC_COLLATE=C ls --color=auto -hF --group-directories-first"
+  alias la="ls -A"
+  alias ll="ls -Al"
+  alias LS=sl
+fi 
+alias pacman="sudo pacman --color=auto"
+alias less="less -M"
+alias ca="cargo"
+## Git aliases
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gs='git status'
+alias gd='git diff'
+alias gdd='git diff --staged'
+alias gpl='git pull'
+alias gps='git push'
+alias gt='git tag'
+alias gch='git checkout'
+
+alias cd="cd >/dev/null"
