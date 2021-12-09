@@ -26,9 +26,10 @@ return require('packer').startup(function()
     use {'neovim/nvim-lspconfig'}
     -- use {'nvim-lua/lsp_extensions.nvim'}
     use {'simrat39/rust-tools.nvim'}
+    use {'nvim-lua/lsp-status.nvim'}
 
     -- Completion - use either one of this
-    use { 'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-path'} 

@@ -1,5 +1,11 @@
 local lualine = require'lualine'
 local utils = require 'lualine.utils.utils'
+local colors = {
+  error = utils.extract_highlight_colors("DiagnosticSignError","fg"),
+  warn  = utils.extract_highlight_colors("DiagnosticSignWarn","fg"),
+  info  = utils.extract_highlight_colors("DiagnosticSignInfo","fg"),
+  hint  = utils.extract_highlight_colors("DiagnosticSignHint","fg"),
+}
 lualine.setup {
   options = {
     theme = 'gruvbox-material',
@@ -15,12 +21,15 @@ lualine.setup {
         sources = {'nvim_lsp'},
         sections = {'error', 'warn', 'info', 'hint'},
         diagnostics_color = {
-            error = { fg = utils.extract_highlight_colors("DiagnosticSignError","fg")},
-            warn  = { fg = utils.extract_highlight_colors("DiagnosticSignWarn","fg")},
-            info  = { fg = utils.extract_highlight_colors("DiagnosticSignInformation","fg")},
-            hint  = { fg = utils.extract_highlight_colors("DiagnosticSignHint","fg")}
+            error = { fg = colors.error },
+            warn  = { fg = colors.warn },
+            info  = { fg = colors.info },
+            hint  = { fg = colors.hint },
         },
       },
+      { "require'lsp-status'.status_progress()",
+        color = { fg = colors.info },
+      }, 
     },
     lualine_x = {
       { 'encoding' },

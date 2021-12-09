@@ -1,7 +1,10 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local lspconfig = require('lspconfig')
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
+
 local opts = {
   tools = { -- rust-tools options
       autoSetHints = true,
@@ -54,8 +57,8 @@ autocmd CursorHold *.rs lua vim.lsp.diagnostic.show_line_diagnostics{focusable=f
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 ]])
 
-vim.fn.sign_define("DiagnosticSignError",       {text = "E:", numhl = "RedSign"})
-vim.fn.sign_define("DiagnosticSignWarn",        {text = "W:", numhl = "YellowSign"})
-vim.fn.sign_define("DiagnosticSignInformation", {text = "I:", numhl = "BlueSign"})
-vim.fn.sign_define("DiagnosticSignHint",        {text = "H:", numhl = "AquaSign"})
+vim.fn.sign_define("DiagnosticSignError", {text = "E:", numhl = "RedSign"})
+vim.fn.sign_define("DiagnosticSignWarn",  {text = "W:", numhl = "YellowSign"})
+vim.fn.sign_define("DiagnosticSignInfo",  {text = "I:", numhl = "BlueSign"})
+vim.fn.sign_define("DiagnosticSignHint",  {text = "H:", numhl = "AquaSign"})
 
