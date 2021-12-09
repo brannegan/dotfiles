@@ -28,33 +28,20 @@ return require('packer').startup(function()
     use {'simrat39/rust-tools.nvim'}
 
     -- Completion - use either one of this
+    use { 'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
     use {'hrsh7th/cmp-buffer'}
-    use {'hrsh7th/cmp-path'}
-    use {'hrsh7th/cmp-cmdline'}
-    use {'hrsh7th/nvim-cmp'}
-    -- use { 'nvim-lua/completion-nvim' }
-
-    -- Better LSP experience
-    -- use {'p00f/nvim-ts-rainbow'}
-    -- use {
-    --     "folke/trouble.nvim",
-    --     config = function() require("trouble").setup {} end
-    -- }
-    ----use 'folke/lsp-colors.nvim'
+    use {'hrsh7th/cmp-path'} 
+    use {'saadparwaiz1/cmp_luasnip'}
+    -- {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}, 
+    -- Snippets
+    use { 'L3MON4D3/LuaSnip' }
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     --use {'nvim-treesitter/nvim-treesitter-textobjects'}
     --use {'nvim-treesitter/playground'}
 
-    -- Status line
-    -- use {
-        -- 'glepnir/galaxyline.nvim',
-        -- branch = 'main',
-        -- config = function() require 'statusline' end
-    -- }
-    -- use {'itchyny/lightline.vim'}
     use {'hoob3rt/lualine.nvim'}
 
     -- DAP
