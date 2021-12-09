@@ -1,21 +1,33 @@
 local lualine = require'lualine'
+local utils = require 'lualine.utils.utils'
 lualine.setup {
-  options = {theme = 'gruvbox-material'},
+  options = {
+    theme = 'gruvbox-material',
+    component_separators = {left = '|', right = '|'},
+  },
+  -- options = {theme = 'gruvbox_dark'},
   sections = {
     lualine_a = {{'mode', lower = false}},
-    lualine_b = {{'filename', path = 2}},
-    lualine_c = {{'diagnostics',
-      sources = {'nvim_lsp'},
-      sections = {'error', 'warn', 'info', 'hint'},
-      -- all colors are in format #rrggbb
-      color_error = '#ea6962',-- changes diagnostic's error foreground color
-      color_warn  = '#d8a657',-- changes diagnostic's warn foreground color
-      color_info  = '#7daea3',-- Changes diagnostic's info foreground color
-      color_hint  = '#89b482',-- Changes diagnostic's hint foreground color
-      --symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
-    }},
-    lualine_x = {'encoding'},
-    lualine_y = {'filetype'},
-    lualine_z = {'location'}
-  }
+    lualine_b = {{'filename', path = 1}},
+    lualine_c = {
+      { 'diagnostics',
+        icons_enabled = false,
+        sources = {'nvim_lsp'},
+        sections = {'error', 'warn', 'info', 'hint'},
+        diagnostics_color = {
+            error = { fg = utils.extract_highlight_colors("DiagnosticSignError","fg")},
+            warn  = { fg = utils.extract_highlight_colors("DiagnosticSignWarn","fg")},
+            info  = { fg = utils.extract_highlight_colors("DiagnosticSignInformation","fg")},
+            hint  = { fg = utils.extract_highlight_colors("DiagnosticSignHint","fg")}
+        },
+      },
+    },
+    lualine_x = {
+      { 'encoding' },
+      { 'fileformat' }, 
+      { 'filetype', colored = true, icon_only = true, },
+    },
+    lualine_y = {'progress'},
+    lualine_z = {'location'},
+  },
 }

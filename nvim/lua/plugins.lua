@@ -28,8 +28,11 @@ return require('packer').startup(function()
     use {'simrat39/rust-tools.nvim'}
 
     -- Completion - use either one of this
-    use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-path'}
+    use {'hrsh7th/cmp-cmdline'}
+    use {'hrsh7th/nvim-cmp'}
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience

@@ -14,13 +14,19 @@ require('telescope').setup {
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new
-  }
+  },
+  pickers = {
+    find_files = {
+      no_ignore = true,
+    }
+  },
 }
 
 local utils = require('utils')
-utils.map('n', '<leader>f',     "<cmd>lua require'telescope.builtin'.find_files()<CR>")
-utils.map('n', '<leader>rg',    "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
-utils.map('n', '<leader>b',     "<cmd>lua require'telescope.builtin'.buffers()<CR>")
+utils.map('n', '<leader>ff',   "<cmd>lua require'telescope.builtin'.find_files()<CR>")
+utils.map('n', '<leader>fg',   "<cmd>lua require'telescope.builtin'.git_files()<CR>")
+utils.map('n', '<leader>rg',   "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
+utils.map('n', '<leader>b',    "<cmd>lua require'telescope.builtin'.buffers()<CR>")
 utils.map('n', '<leader>r',    "<cmd>lua require'telescope.builtin'.lsp_references()<CR>")
 utils.map('n', '<leader>s',    "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols()<CR>")
-utils.map('n', '<leader>q',     "<cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics()<CR>")
+utils.map('n', '<leader>q',    "<cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics()<CR>")
