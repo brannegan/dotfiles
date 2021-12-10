@@ -15,4 +15,9 @@ utils.map('i', '<down>', '<nop>')
 utils.map('i', '<left>', '<nop>')
 utils.map('i', '<right>', '<nop>')
 
-                                  
+vim.cmd(':command! WQ wq')
+vim.cmd(':command! WQ wq')
+vim.cmd(':command! Wq wq')
+vim.cmd(':command! Wqa wqa')
+vim.cmd(':command! W w')
+vim.cmd(':command! Q q')          
