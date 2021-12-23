@@ -50,10 +50,10 @@ utils.map('n', 'gt',             '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 utils.map('n', '<leader>a',      '<cmd>lua vim.lsp.buf.code_action()<CR>')
 utils.map('n', '<leader>h',      '<cmd>lua vim.lsp.buf.hover()<CR>')
 utils.map('n', '<leader>i',      '<cmd>lua vim.lsp.buf.implementation()<CR>')
-utils.map('n', '<leader>dn',     '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-utils.map('n', '<leader>dp',     '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+utils.map('n', '<leader>dn',     '<cmd>lua vim.diagnostic.goto_next()<CR>')
+utils.map('n', '<leader>dp',     '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+utils.map('n', '<leader>dd',     '<cmd>lua vim.diagnostic.open_float(nil, {scope = "line"})<CR>')
 vim.cmd([[
-autocmd CursorHold *.rs lua vim.lsp.diagnostic.show_line_diagnostics{focusable=false}
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 ]])
 
