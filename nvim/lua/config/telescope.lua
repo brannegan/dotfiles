@@ -23,10 +23,10 @@ require('telescope').setup {
 }
 
 local utils = require('utils')
-utils.map('n', '<leader>ff',   "<cmd>lua require'telescope.builtin'.find_files()<CR>")
-utils.map('n', '<leader>fg',   "<cmd>lua require'telescope.builtin'.git_files()<CR>")
-utils.map('n', '<leader>rg',   "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
-utils.map('n', '<leader>b',    "<cmd>lua require'telescope.builtin'.buffers()<CR>")
-utils.map('n', '<leader>r',    "<cmd>lua require'telescope.builtin'.lsp_references()<CR>")
-utils.map('n', '<leader>s',    "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols()<CR>")
-utils.map('n', '<leader>q',    "<cmd>lua require'telescope.builtin'.lsp_workspace_diagnostics()<CR>")
+utils.map('n', '<leader>ff',   "<cmd>Telescope find_files<CR>")
+utils.map('n', '<leader>fg',   "<cmd>Telescope git_files<CR>")
+utils.map('n', '<leader>rg',   "<cmd>Telescope live_grep<CR>")
+utils.map('n', '<leader>b',    "<cmd>Telescope buffers<CR>")
+utils.map('n', '<leader>re',    "<cmd>Telescope lsp_references<CR>")
+utils.map('n', '<leader>sy',    "<cmd>Telescope lsp_document_symbols<CR>")
+utils.map('n', '<leader>q',    "<cmd>Telescope diagnostics<CR>")

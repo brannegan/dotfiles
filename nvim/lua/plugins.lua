@@ -25,7 +25,6 @@ return require('packer').startup(function()
     -- LSP config
     use {'neovim/nvim-lspconfig'}
     -- use {'nvim-lua/lsp_extensions.nvim'}
-    use {'simrat39/rust-tools.nvim'}
     use {'nvim-lua/lsp-status.nvim'}
 
     -- Completion - use either one of this
@@ -51,7 +50,7 @@ return require('packer').startup(function()
     -- use {'theHamsta/nvim-dap-virtual-text'}
 
     -- Rust
-    -- use {'simrat39/rust-tools.nvim'}
+    use {'simrat39/rust-tools.nvim'}
 
     -- use {'oberblastmeister/neuron.nvim' }
 

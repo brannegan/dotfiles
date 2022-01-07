@@ -9,7 +9,7 @@ local opts = {
   tools = { -- rust-tools options
       autoSetHints = true,
       hover_with_actions = false,
-      runnables = { use_telescope = true },
+      --runnables = true,
       inlay_hints = {
         only_current_line = true,
         show_parameter_hints = true,
