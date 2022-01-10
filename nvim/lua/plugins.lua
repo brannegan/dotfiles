@@ -32,10 +32,12 @@ return require('packer').startup(function()
     use {'hrsh7th/cmp-nvim-lsp'}
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-path'} 
-    use {'saadparwaiz1/cmp_luasnip'}
     -- {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}, 
     -- Snippets
-    use { 'L3MON4D3/LuaSnip' }
+    -- use { 'L3MON4D3/LuaSnip' }
+    -- use {'saadparwaiz1/cmp_luasnip'}
+    use { 'dcampos/nvim-snippy' }
+    use { 'dcampos/cmp-snippy' }
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

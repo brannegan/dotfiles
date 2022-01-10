@@ -23,10 +23,10 @@ require('telescope').setup {
 }
 
 local utils = require('utils')
-utils.map('n', '<leader>ff',   "<cmd>Telescope find_files<CR>")
-utils.map('n', '<leader>fg',   "<cmd>Telescope git_files<CR>")
-utils.map('n', '<leader>rg',   "<cmd>Telescope live_grep<CR>")
-utils.map('n', '<leader>b',    "<cmd>Telescope buffers<CR>")
-utils.map('n', '<leader>re',    "<cmd>Telescope lsp_references<CR>")
-utils.map('n', '<leader>sy',    "<cmd>Telescope lsp_document_symbols<CR>")
-utils.map('n', '<leader>q',    "<cmd>Telescope diagnostics<CR>")
+utils.map('n', '<leader>ff', "<cmd>Telescope find_files<CR>")
+utils.map('n', '<leader>fg', "<cmd>Telescope git_files<CR>")
+utils.map('n', '<leader>rg', "<cmd>Telescope live_grep<CR>")
+utils.map('n', '<leader>b',  "<cmd>Telescope buffers<CR>")
+utils.map('n', '<leader>re', "<cmd>Telescope lsp_references<CR>")
+utils.map('n', '<leader>sy', "<cmd>Telescope lsp_document_symbols<CR>")
+utils.map('n', '<leader>q',  "<cmd>Telescope diagnostics<CR>")
