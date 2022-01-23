@@ -9,7 +9,6 @@ local opts = {
   tools = { -- rust-tools options
       autoSetHints = true,
       hover_with_actions = false,
-      --runnables = true,
       inlay_hints = {
         only_current_line = true,
         show_parameter_hints = true,
@@ -43,13 +42,14 @@ local opts = {
 }
 require('rust-tools').setup(opts)
 local utils = require('utils')
+utils.map('n', '<leader>ru',     '<cmd>RustRunnables<CR>')
 utils.map('n', '<F1>',           '<cmd>lua vim.lsp.buf.formatting()<CR>')
 utils.map('n', '<F2>',           '<cmd>lua vim.lsp.buf.rename()<CR>')
 utils.map('n', 'gd',             '<cmd>lua vim.lsp.buf.definition()<CR>')
 utils.map('n', 'gt',             '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 utils.map('n', '<leader>a',      '<cmd>lua vim.lsp.buf.code_action()<CR>')
+utils.map('n', '<leader>aa',     '<cmd>lua vim.lsp.buf.range_code_action()<CR>')
 utils.map('n', '<leader>h',      '<cmd>lua vim.lsp.buf.hover()<CR>')
-utils.map('n', '<leader>i',      '<cmd>lua vim.lsp.buf.implementation()<CR>')
 utils.map('n', '<leader>dn',     '<cmd>lua vim.diagnostic.goto_next()<CR>')
 utils.map('n', '<leader>dp',     '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 utils.map('n', '<leader>dd',     '<cmd>lua vim.diagnostic.open_float(nil, {scope = "line"})<CR>')

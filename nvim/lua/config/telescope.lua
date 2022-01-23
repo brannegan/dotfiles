@@ -20,7 +20,13 @@ require('telescope').setup {
       no_ignore = true,
     }
   },
+ extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
+    }
+  },
 }
+require("telescope").load_extension("ui-select")
 
 local utils = require('utils')
 utils.map('n', '<leader>ff', "<cmd>Telescope find_files<CR>")
