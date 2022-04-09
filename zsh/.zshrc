@@ -29,7 +29,6 @@ load_module() {
   fi
 }
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 #load_module romkatv powerlevel10k zsh-theme
 load_module zsh-users zsh-autosuggestions zsh
 load_module zsh-users zsh-syntax-highlighting zsh
@@ -92,6 +91,7 @@ zstyle ':completion:*:processes-names' command 'ps -e -o comm='
 zstyle ':completion:*:*:killall:*' menu yes select
 zstyle ':completion:*:killall:*'   force-list always
 
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ## Copied part for git
 #setopt prompt_subst
 #autoload -Uz vcs_info
@@ -208,3 +208,5 @@ if [ -f "$HOME/.config/zsh/local.zsh" ]; then
 fi
 
 eval "$(starship init zsh)"
+#export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+#export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"

@@ -17,7 +17,6 @@ o.clipboard = 'unnamed,unnamedplus'
 o.timeoutlen = 500
 o.updatetime = 300
 o.colorcolumn = {100}
-o.inccommand = "nosplit"
 o.signcolumn = "no"
 --o.cmdheight = 2
 o.number = true
@@ -27,7 +26,8 @@ o.cursorline = true
 o.splitbelow = true
 o.splitright = true
 o.completeopt = "menuone,noselect"
-
+o.foldmethod = "indent"
+o.foldenable = false
 vim.g.mapleader = ' '
 
 cmd [[

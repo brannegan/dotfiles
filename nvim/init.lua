@@ -16,16 +16,16 @@ vim.cmd [[packadd packer.nvim]]
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
 -- Install plugins
-require('plugins')
+require('use')
 
 -- Key mappings
 require('keymaps')
 
 -- LSP
-require('lsp_conf')
+require('lsp')
 
--- Another option is to groups configuration in one folder
-require('config')
+-- Plugins config
+require('plugins')
 
 -- DAP
 -- require('dbg')
