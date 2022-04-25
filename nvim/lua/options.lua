@@ -1,4 +1,3 @@
-local utils = require('utils')
 
 local o = vim.opt
 local cmd = vim.cmd
@@ -25,9 +24,12 @@ o.scrolloff = 8
 o.cursorline = true
 o.splitbelow = true
 o.splitright = true
+o.title = true
+o.showmode = false
 o.completeopt = "menuone,noselect"
 o.foldmethod = "indent"
 o.foldenable = false
+o.laststatus=3
 vim.g.mapleader = ' '
 
 cmd [[

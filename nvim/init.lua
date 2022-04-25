@@ -2,9 +2,10 @@
 
 local fn = vim.fn
 local execute = vim.api.nvim_command
+local autocmd = vim.api.nvim_create_autocmd
 
 -- Sensible defaults
-require('settings')
+require('options')
 
 -- Auto install packer.nvim if not exists
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
@@ -13,7 +14,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
                 install_path)
 end
 vim.cmd [[packadd packer.nvim]]
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+autocmd("BufWritePost", { pattern = "use.lua", callback = require'packer'.compile })
 
 -- Install plugins
 require('use')
@@ -24,8 +25,8 @@ require('keymaps')
 -- LSP
 require('lsp')
 
--- Plugins config
-require('plugins')
+-- Colorscheme
+require('colorscheme')
 
 -- DAP
 -- require('dbg')
