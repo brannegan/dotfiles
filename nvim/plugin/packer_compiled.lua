@@ -105,16 +105,19 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/lsp-status.nvim"
   },
   ["lualine.nvim"] = {
+    config = { 'require("plugins/lualine")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
   ["nvim-autopairs"] = {
+    config = { 'require("plugins/autopairs")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
+    config = { 'require("plugins/nvim-cmp")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
@@ -125,11 +128,13 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
+    config = { 'require("plugins/treesitter")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
+    config = { 'require("plugins/devicon")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
@@ -161,11 +166,13 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
+    config = { 'require("plugins/telescope")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
+    config = { 'require("plugins/toggleterm")' },
     loaded = true,
     path = "/home/zapp/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -183,6 +190,34 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require("plugins/nvim-cmp")
+time([[Config for nvim-cmp]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+require("plugins/devicon")
+time([[Config for nvim-web-devicons]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("plugins/telescope")
+time([[Config for telescope.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+require("plugins/toggleterm")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require("plugins/autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require("plugins/treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+require("plugins/lualine")
+time([[Config for lualine.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

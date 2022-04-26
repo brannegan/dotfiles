@@ -26,15 +26,6 @@ vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.open_float(nil, {scope = "line"}) end)
 
--- Telescope
-local telescope = require'telescope.builtin'
-vim.keymap.set('n', '<leader>ff', telescope.find_files)
-vim.keymap.set('n', '<leader>fg', telescope.git_files)
-vim.keymap.set('n', '<leader>rg', telescope.live_grep)
-vim.keymap.set('n', '<leader>b',  telescope.buffers)
-vim.keymap.set('n', '<leader>re', telescope.lsp_references)
-vim.keymap.set('n', '<leader>sy', telescope.lsp_document_symbols)
-vim.keymap.set('n', '<leader>q',  telescope.diagnostics)
 
 vim.cmd(':command! WQ wq')
 vim.cmd(':command! WQ wq')

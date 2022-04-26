@@ -14,7 +14,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
                 install_path)
 end
 vim.cmd [[packadd packer.nvim]]
-autocmd("BufWritePost", { pattern = "use.lua", callback = require'packer'.compile })
+--autocmd("BufWritePost", {pattern = "use.lua", callback = function() require'packer'.compile() end})
 
 -- Install plugins
 require('use')

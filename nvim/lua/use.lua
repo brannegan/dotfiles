@@ -1,6 +1,7 @@
-function get_setup(name)
-  return string.format('require("setup/%s")', name)
+function get_config(name)
+  return string.format('require("plugins/%s")', name)
 end
+
 return require('packer').startup(function()
 
     -- Packer can manage itself as an optional plugin
@@ -10,10 +11,14 @@ return require('packer').startup(function()
     --use {'tpope/vim-fugitive'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-repeat'}
-    use {'windwp/nvim-autopairs', config = require('plugins/autopairs')}
+    use {'windwp/nvim-autopairs',
+      config = get_config("autopairs")
+    }
 
     -- Color scheme
-    use {'kyazdani42/nvim-web-devicons', config = require('plugins/devicon')}
+    use {'kyazdani42/nvim-web-devicons',
+      config = get_config("devicon")
+    }
     use {'sainnhe/gruvbox-material'}
 
     -- Telescope
@@ -23,7 +28,7 @@ return require('packer').startup(function()
       requires = {
         'nvim-telescope/telescope-ui-select.nvim',
       },
-      config = require('plugins/telescope')
+      config = get_config("telescope")
     }
 
     -- LSP config
@@ -38,21 +43,22 @@ return require('packer').startup(function()
         'hrsh7th/cmp-path',
         'saadparwaiz1/cmp_luasnip',
       },
-      config = require('plugins/nvim-cmp')
+      config = get_config("nvim-cmp")
     }
-    -- {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}, 
     -- Snippets
     use { 'L3MON4D3/LuaSnip' }
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',
-          config = require('plugins/treesitter')
+          config = get_config("treesitter")
     }
     --use {'nvim-treesitter/nvim-treesitter-textobjects'}
     --use {'nvim-treesitter/playground'}
 
-    use {'hoob3rt/lualine.nvim', config = require('plugins/lualine')}
+    use {'hoob3rt/lualine.nvim', 
+      config = get_config("lualine")
+    }
   
     -- DAP
     -- use {'mfussenegger/nvim-dap'}
@@ -63,6 +69,8 @@ return require('packer').startup(function()
     use {'simrat39/rust-tools.nvim'}
 
     -- Terminal
-    use {"akinsho/toggleterm.nvim", config = require('plugins/toggleterm')}
+    use {"akinsho/toggleterm.nvim",
+      config = get_config("toggleterm")
+    }
 
 end)
