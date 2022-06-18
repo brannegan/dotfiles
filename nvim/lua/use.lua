@@ -14,6 +14,7 @@ return require('packer').startup(function()
    use {'windwp/nvim-autopairs',
      config = get_config("autopairs")
    }
+   use "tversteeg/registers.nvim"
   
    -- Color scheme
    use {'sainnhe/gruvbox-material'}
