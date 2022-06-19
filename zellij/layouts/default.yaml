@@ -28,7 +28,7 @@ tabs:
     direction: Vertical
     run:
       command: { cmd: zsh, args: ["-c", "cd ~/code && zsh"] }
-  - name: "zsh" 
+  - name: "cfg" 
     direction: Vertical
     parts:
     - direction: Vertical
@@ -39,8 +39,9 @@ tabs:
     - direction: Vertical
       split_size:
         Percent: 50
-  - name: "bottom" 
+  - name: "zsh" 
     direction: Vertical
     run:
-      command: {cmd: btm}
+      command: { cmd: zsh, args: ["-c", "btm && zsh"] }
+     #command: {cmd: btm}
     focus: true
