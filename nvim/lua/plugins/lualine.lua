@@ -8,7 +8,7 @@ local colors = {
 }
 lualine.setup {
   options = {
-    theme = 'gruvbox-material',
+    theme = 'everforest',
     component_separators = {left = '|', right = '|'},
     globalstatus = true,
   },

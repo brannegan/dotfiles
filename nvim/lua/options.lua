@@ -28,7 +28,8 @@ o.title = true
 o.showmode = false
 o.completeopt = "menuone,noselect"
 o.foldmethod = "indent"
-o.foldenable = false
+o.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldlevel = 99
 o.laststatus=3
 vim.g.mapleader = ' '
 

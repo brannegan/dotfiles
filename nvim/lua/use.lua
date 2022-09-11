@@ -18,6 +18,10 @@ return require('packer').startup(function()
   
    -- Color scheme
    use {'sainnhe/gruvbox-material'}
+   use {'sainnhe/everforest'}
+   use {'NvChad/nvim-colorizer.lua',
+    config = require'colorizer'.setup()
+  }
 
    -- Telescope
    use {'nvim-telescope/telescope.nvim',
@@ -60,6 +64,7 @@ return require('packer').startup(function()
          run = ':TSUpdate',
          config = get_config("treesitter")
    }
+    use 'nvim-treesitter/nvim-treesitter-context'
    --use {'nvim-treesitter/nvim-treesitter-textobjects'}
    --use {'nvim-treesitter/playground'}
    use {'hoob3rt/lualine.nvim', 

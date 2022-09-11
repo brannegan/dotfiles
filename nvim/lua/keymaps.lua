@@ -2,6 +2,8 @@
 vim.keymap.set('n', '<Esc>', '<cmd>noh<CR>:cclose<CR><Esc>', {silent=true})
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'gl', '$')
+vim.keymap.set('n', 'gh', '^')
 vim.keymap.set('n', '<SPACE>', '<nop>')
 vim.keymap.set('n', '<up>', '<nop>')
 vim.keymap.set('n', '<down>', '<nop>')
