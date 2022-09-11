@@ -1,0 +1,249 @@
+;; ** Variables ***********************************************************************
+;; all the deffpolls
+
+(defpoll year :interval "10h" "date +%Y")
+(defpoll month :interval "10m" "date +%m")
+(defpoll day :interval "5m" "date +%e")
+(defpoll hour :interval "5s" "date '+%H'")
+(defpoll min :interval "5s" "date '+%M'")
+
+(defpoll VOLUME :interval "1s" `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -F' ' '{print $2 * 100}'`)
+
+;;defwidgets******************************************************************
+
+(defwidget bar []
+	;;(centerbox :style "background-image: url('${BARIMG}');"
+	(centerbox
+    (left)
+    (center)
+    (right)
+))
+
+(defwidget left []
+	(box :orientation "h" 
+    :space-evenly false  
+    :halign "start"
+    :valign "start"
+    :class "left_modules"
+    (power)
+    (sysinfo)
+))
+
+(defwidget center []
+	(box :orientation "h" 
+    :space-evenly false  
+    :halign "center"
+    :valign "center"
+    :class "center_modules"
+    ;(workspaces)
+    (wss)
+))
+
+(defwidget right []
+	(box :orientation "h"
+    :space-evenly false
+    :halign "end"
+    :class "right_modules"
+    (usb)
+    (volume)
+    (mail)
+    (clock)
+))
+
+(defwidget sep []
+  (box 
+    :vexpand "false"
+    :hexpand "false"
+    (label :class "sep" :text "|")))
+
+(defwidget sysinfo []
+  (box :class "sysinfo" :orientation "h" :space-evenly false :halign "start"
+    (button
+      :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/mem.toml"`
+      (box :class "mem-box-inner" :space-evenly false :spacing 3
+          (label :class "txt glyph" :text "")
+          (label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
+          (label :class "txt unit" :text "GB")))
+    (button
+      :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/cpu.toml"`
+      (box :class "cpu-box-inner" :space-evenly false :spacing 3
+          (label :class "txt glyph" :text "")
+          (label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
+          (label :class "txt unit" :text "%")))
+))
+
+(defvar reveal_pow false)
+(defwidget power []
+  (box :class "power"
+       :space-evenly false
+       :halign "start"
+    (hover-power :vara reveal_pow :varname "reveal_pow" :icon "")
+))
+(defwidget hover-power [vara varname icon ?class]
+  (box :space-evenly false
+       :class "hover-power ${class}"
+    (revealer-on-hover :var vara
+                       :varname "${varname}"
+                       :icon icon
+                       :transition "slideleft"
+      (button :class "hover txt glyph" :onclick "systemctl poweroff" :tooltip "Poweroff"      "")
+      (box :space-evenly true
+        (button :class "hover txt glyph" :onclick "systemctl suspend"  :tooltip "Suspend"     "")
+        (button :class "hover txt glyph" :onclick "systemctl reboot"   :tooltip "Reboot"      "ﯩ")
+        (button :class "hover txt glyph" :onclick "hyprctl dispatch exit 0" :tooltip "logoff" ""))
+      (sep)
+)))
+
+(defvar reveal_vol false)
+;(defvar reveal_mic false)
+(defwidget volume []
+  (box :class "volume"
+       :space-evenly false
+       :halign "end"
+    (hover-volume :vara reveal_vol :varname "reveal_vol" :icon "")
+    ;(hover-module :vara reveal_mic :varname "reveal_mic" :icon "")
+))
+
+(defwidget hover-volume [vara varname icon ?class]
+  (box :space-evenly false
+       :class "hover-volume ${class}"
+    (revealer-on-hover :var vara
+                       :varname "${varname}"
+                       :icon icon
+                       :transition "slideleft"
+      (label :class "txt glyph" :text icon)
+      (scale 
+             :value VOLUME 
+             ;:tooltip "${VOLUME}%"
+             :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+             :max 100
+             :min 0
+             )
+      (label :class "txt" :text "${VOLUME}%")
+    )))
+
+(defwidget revealer-on-hover [var varname ?class ?duration ?transition]
+  (box :class "${class} revealer-on-hover"
+       :orientation "h"
+       :space-evenly false
+    (eventbox :class "eventbox"
+              :onhover "eww update ${varname}=true"
+              :onhoverlost "eww update ${varname}=false"
+      (box :space-evenly false
+        (children :nth 0)
+        (revealer :reveal var
+                  :transition {transition ?: "slideright"}
+                  :duration {duration ?: "500ms"}
+          (children :nth 1))
+
+        (children :nth 2)
+        ))))
+
+(defvar usb_devices "[]")
+(defwidget usb [] 
+  (box :class "usb"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (for usb_device in usb_devices
+      (button :class "txt glyph" :timeout "1s"
+      :onclick "udisksctl unmount -b ${usb_device} && udisksctl power-off -b ${usb_device}" 
+      :tooltip "eject " ""))
+))
+
+(defvar reveal_mail false)
+(deflisten mail_counter "scripts/mail")
+(defwidget mail [] 
+  (box :class "mail"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (revealer :reveal { mail_counter > 0 }
+              :transition "slideright"
+              :duration "500ms"
+      (box :class "mail-box" 
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
+        (label :class "txt glyph" :text "")
+        (label :class "txt" :text "${mail_counter}")))
+))
+
+(defwidget clock []
+  (box :class "clock"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (box :class "clock-box"
+      :orientation "h"
+      :space-evenly false
+      :halign "end"
+      (label :class "txt glyph" :text "")
+      (label :class "txt" :text "${hour}:${min}"))
+    (button :onclick "eww open --toggle calendar"
+      (box :class "date-box"
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
+        (label :class "txt glyph" :text "")
+        (label :class "txt" :text "${day}.${month}")))
+))
+
+;(deflisten workspace "scripts/workspace")
+;(defwidget workspaces [] (literal :content workspace))
+
+(deflisten wss_json "scripts/wss")
+(defvar icons '{"Alacritty":                "",
+                "firefox":                  "",
+                "mpv":                      "懶",
+                "telegramdesktop":          "",
+                "org.keepassxc.KeePassXC":  "",
+                "None":                     ""}')
+(defwidget wss [] 
+  (box :class "wss"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (for ws in wss_json
+      (button :class { ws.active ? "txt glyph" : "inactive glyph"} 
+              :timeout "1s"
+              :onclick "hyprctl dispatch workspace ${ws.id}"
+              "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))
+))
+
+(defwidget calendar_ []
+  (box
+    :class "calendar"
+    :orientation "h"
+    :valign "fill"
+    :halign "fill"
+    (calendar
+      :day day
+      :year year
+      :show-details "true"
+      :show-heading "true"
+      :show-day-names "true")))
+;; windows ****************************************
+
+(defwindow bar
+  :exclusive true
+  :monitor 0
+  :windowtype "dock"
+  :stacking "bg"
+	:focusable false
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "1910px"
+                      :height "10px"
+                      :anchor "top center")
+  (bar))
+(defwindow calendar
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :x "5px" 
+                      :y "5px"
+                      :width "400px"
+                      :height "100px"
+                      :anchor "top right")
+  (calendar_))
+

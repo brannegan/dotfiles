@@ -1,0 +1,6 @@
+#!/bin/bash
+counter=/tmp/himalaya-counter
+#if [ ! -f $counter ]; then 
+#  echo "0" > $counter
+#fi
+tail -fn 1 $counter | xargs -I {} sh -c 'if [ {} -gt 0 ]; then echo {}; else echo 0; fi'

@@ -1,0 +1,133 @@
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+	font-family: JetBrainsMono Nerd Font;
+  font-size: 18px;
+}
+
+@import "colors.scss";
+.bar {
+	background-color: rgba($bg,0.96);
+  border: 2px solid rgba($cyan, 0.67);
+  border-top: 0px;
+  border-radius: 0px 0px 5px 5px;
+	//background: linear-gradient(to right, #121212,#181818,#050505,#181818,#121212);
+  //border: 2px solid $red;
+}
+.left_modules {
+  margin-left: 5px;
+  //border: 2px solid $magenta;
+}
+.center_modules {
+  //border: 2px solid $magenta;
+}
+.right_modules {
+  //border: 2px solid $magenta;
+  margin-right: 5px;
+}
+.sysinfo {
+  //border: 2px solid $magenta;
+}
+.volume {
+  //border: 2px solid $magenta;
+}
+.mail {
+  //border: 2px solid $magenta;
+  //margin-left: 10px;
+  //padding:  0px 10px 0px 10px;
+}
+.clock {
+  //margin-left: 10px
+  //padding:  0px 10px 0px 10px;
+}
+.calendar {
+    font-size: 14px;
+    background-color: rgba($bg, 0.4);
+    color: $green;
+    border: 2px solid rgba($cyan, 0.67);
+    border-radius: 0px 0px 20px 20px;
+    padding: 10px;
+}
+
+.hover-power {
+  color: $green;
+}
+.txt {
+  color: $green;
+}
+.glyph {
+  padding:  0px 10px 0px 10px;
+}
+.inactive {
+  color: $bg5;
+}
+.sep {
+  color: $bg_blue;
+}
+
+.0 , .01, .02, .03, .04, .05, .06,
+.011, .022, .033, .044, .055, .066{
+  margin: 0px 0px 0px 0px;
+}
+
+/* Unoccupied */
+.0 {
+	color: $green;
+}
+
+/* Occupied */
+.01, .02, .03, .04, .05, .06, .07, .08, .09 {
+	color: $yellow;
+}
+
+/* Focused */
+.011, .022, .033, .044, .055, .066, .077, .088, .099{
+	color: $red;
+	font-weight:bold;
+}
+
+.module {
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px 10px 0px 10px;
+}
+
+scale trough {
+  all: unset;
+  background-color: $bg_blue;
+  border-radius: 50px;
+  min-height: 10px;
+  min-width: 100px;
+  margin-right: 10px;
+}
+scale trough highlight {
+  all: unset;
+  background-color: $red;
+  border-radius: 10px;
+}
+button:hover.hover {
+  color: $black;
+  background: $green;
+}
+
+calendar:selected {
+  color: $bg;
+  background-color: $red;
+}
+
+calendar.header {
+  color: $blue;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $yellow;
+}
+
+calendar.highlight {
+  color: $blue;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: $black;
+}
+

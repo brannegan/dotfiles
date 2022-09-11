@@ -1,30 +1,36 @@
+env:
+    TERM: alacritty
+
 window:
-  dimensions:
-    columns: 105
-    lines: 40
-  padding:
-    x: 5
-    y: 5
-  opacity: 0.95
+    decorations: full
+    opacity: 0.95
+    dimensions:
+      columns: 106
+      lines: 40
+    padding:
+      x: 0
+      y: 0
 
 font:
-  normal:
-    # family: monospace
-    family: MesloLGS NF
-    style: Regular
-  bold:
-    family: MesloLGS NF
-    style: Bold
-  italic:
-    family: MesloLGS NF
-    style: Italic
-  bold_italic:
-    family: MesloLGS NF
-    style: Bold Italic
-  size: 13.0
+    normal:
+      #family: FiraCode Nerd Font
+      #family: Iosevka
+      family: JetBrainsMono Nerd Font
+      style: Regular
+    bold:
+      family: JetBrainsMono Nerd Font
+      style: Bold
+    italic:
+      family: JetBrainsMono Nerd Font
+      style: Italic
+    bold_italic:
+      family: JetBrainsMono Nerd Font
+      style: Bold Italic
 
-# Colors (Gruvbox dark)
-colors:
+    size: 13
+
+schemes:
+  gruvbox_material: &gruvbox_material
     primary:
       #background: '0x1d2021'
       background: '0x282828'
@@ -50,29 +56,41 @@ colors:
       cyan:    '0x89b482'
       white:   '0xdfbf8e'
 
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
-  save_to_clipboard: false
+everforest_dark_hard: &everforest_dark_hard
+    primary:
+      #background: '#2b3339'
+      background: '#1d2021'
+      foreground: '#d3c6aa'
+    normal:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
+    bright:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
 
-dynamic_title: true
+colors: *everforest_dark_hard
+  #colors: *gruvbox_material
 
 cursor:
-  style: Block
-  unfocused_hollow: true
+    style:
+      shape: Block
+    unfocused_hollow: true
 
-live_config_reload: true
-
-#shell:
-#  program: /usr/bin/fish
-#  args:
-#    - --login
+shell:
+  program: nu
 
 key_bindings:
-  - { key: V,        mods: Control|Shift, action: Paste            }
-  - { key: C,        mods: Control|Shift, action: Copy             }
-  #- { key: Insert,   mods: Shift,         action: PasteSelection   }
-  #- { key: Key0,     mods: Control,       action: ResetFontSize    }
-  #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  #- { key: Add,      mods: Control,       action: IncreaseFontSize }
-  #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: P,                   mode: Vi, action: PasteSelection }
+  - { key: Escape, mods: Super, mode: ~Search, action: ToggleViMode }

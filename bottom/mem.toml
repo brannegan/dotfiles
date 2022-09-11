@@ -1,0 +1,17 @@
+[flags]
+group_processes = false
+color = "gruvbox"
+mem_as_value = true
+tree = false
+
+[[row]]
+  ratio=1
+  [[row.child]]
+    type="mem"
+[[row]]
+  ratio=2
+  [[row.child]]
+    type="proc"
+    default=true
+
+
