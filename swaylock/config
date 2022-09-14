@@ -1,0 +1,13 @@
+grace=5
+daemonize
+image=~/.config/wallpaper/forest-fog.jpg
+#screenshots
+fade-in=3
+ignore-empty-password
+#effect-greyscale
+effect-blur=10x3
+#effect-pixelate=10
+effect-vignette=0.3:0.7
+indicator
+clock
+text-color=blue
