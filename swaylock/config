@@ -1,13 +1,22 @@
-grace=5
+grace=4
 daemonize
 image=~/.config/wallpaper/forest-fog.jpg
 #screenshots
-fade-in=3
+fade-in=4
 ignore-empty-password
 #effect-greyscale
 effect-blur=10x3
 #effect-pixelate=10
-effect-vignette=0.3:0.7
+effect-vignette=0.1:0.7
 indicator
 clock
-text-color=blue
+text-color=#1d2021
+inside-color=#a7c080
+inside-ver-color=#7fbbb3
+inside-wrong-color=#e67e80
+ring-color=#83c092
+ring-ver-color=#394f5a
+ring-wrong-color=#503946
+key-hl-color=#dbbc7f
+font=JetBrainsMono Nerd Font
+font-size=24

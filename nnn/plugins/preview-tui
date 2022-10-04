@@ -1,0 +1,144 @@
+#!/usr/bin/env sh
+
+PAGER="${PAGER:-less -P?n -R}"
+TMPDIR="${TMPDIR:-/tmp}"
+BAT_STYLE="${BAT_STYLE:-numbers}"
+BAT_THEME="${BAT_THEME:-ansi}"
+PREVIEWPID="$TMPDIR/nnn-preview-tui-previewpid"
+IMV_PID=0
+TERMINAL="${TERMINAL:-alacritty --hold -e}"
+NNN_WINDOW_ADDR=$(hyprctl activewindow -j | jq .address | tr -d \")
+
+exists() { type "$1" >/dev/null 2>&1 ;}
+pkill() { command pkill "$@" >/dev/null 2>&1 ;}
+pidkill() { [ -f "$1" ] && kill "$(cat "$1")" >/dev/null 2>&1; IMV_PID=0;}
+
+fifo_pager() {
+  cmd="$1"
+  shift
+  pidkill "$PREVIEWPID"
+    # We use a FIFO to access $PAGER PID in jobs control
+    if [ "$cmd" = "pager" ]; then
+      if exists bat; then
+        $TERMINAL bat --terminal-width="$cols" --decorations=always --color=always --paging=never --style="$BAT_STYLE" --theme="$BAT_THEME" "$@" &
+      else
+        $TERMINAL $PAGER "$@" &
+      fi
+    else
+      $TERMINAL "$cmd" "$@" &
+    fi
+    printf "%s" "$!" > "$PREVIEWPID"
+  }
+
+# Binary file: show file info inside the pager
+handle_mime() {
+  case "$2" in
+    image/jpeg) image_preview "$1" ;;
+    application/pdf) pdf_preview "$1" ;;
+    application/zip) fifo_pager unzip -l "$1" ;;
+    text/troff)
+      if exists man; then
+        fifo_pager man -Pcat -l "$1"
+      else
+        fifo_pager pager "$1"
+        fi ;;
+      *) handle_ext "$1" "$3" "$4" ;;
+    esac
+  }
+
+handle_ext() {
+  case "$2" in
+    gz|bz2) fifo_pager tar -tvf "$1" ;;
+    md) if exists glow; then
+      fifo_pager glow -s dark "$1"
+    elif exists lowdown; then
+      fifo_pager lowdown -Tterm "$1"
+    else
+      fifo_pager pager "$1"
+      fi ;;
+    htm|html|xhtml)
+      if exists w3m; then
+        fifo_pager w3m "$1"
+      elif exists lynx; then
+        fifo_pager lynx "$1"
+      elif exists elinks; then
+        fifo_pager elinks "$1"
+      else
+        fifo_pager pager "$1"
+        fi ;;
+        7z|a|ace|alz|arc|arj|bz|cab|cpio|deb|jar|lha|lz|lzh|lzma|lzo\
+          |rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z)
+                    if exists atool; then
+                      fifo_pager atool -l "$1"
+                    elif exists bsdtar; then
+                      fifo_pager bsdtar -tvf "$1"
+                    fi ;;
+                    *) fifo_pager pager "$1"
+                  esac
+                }
+
+preview_file() {
+  encoding="$(file -bL --mime-encoding -- "$1")"
+  mimetype="$(file -bL --mime-type -- "$1")"
+  ext="${1##*.}"
+  [ -n "$ext" ] && ext="$(printf "%s" "${ext}" | tr '[:upper:]' '[:lower:]')"
+  lines=$(tput lines)
+  cols=$(tput cols)
+  if [ -d "$1" ]; then
+    cd "$1" || return
+    if exists tree; then
+      fifo_pager tree --filelimit "$(find . -maxdepth 1 | wc -l)" -L 3 -C -F --dirsfirst --noreport
+    elif exists exa; then
+      exa -G --group-directories-first --colour=always
+    else
+      fifo_pager ls -F --group-directories-first --color=always
+    fi
+  elif [ "${encoding#*)}" = "binary" ]; then
+    handle_mime "$1" "$mimetype" "$ext" "bin"
+  else
+    handle_mime "$1" "$mimetype" "$ext"
+  fi
+}
+image_preview() {
+  if [ $IMV_PID -ne 0 ] && ps -p $IMV_PID > /dev/null; then
+    imv-msg $IMV_PID close all
+    imv-msg $IMV_PID open "$1"
+  else 
+    pidkill "$PREVIEWPID"
+    imv "$1" &
+    IMV_PID=$!
+    printf "%s" "$!" > "$PREVIEWPID"
+  fi
+}
+pdf_preview() {
+  pidkill "$PREVIEWPID"
+  zathura "$1" &
+  printf "%s" "$!" > "$PREVIEWPID"
+}
+preview_fifo() {
+  while read -r selection; do
+    if [ -n "$selection" ]; then
+      [ "$selection" = "close" ] && break
+      preview_file "$selection"
+      sleep 0.1
+      hyprctl dispatch focuswindow address:$NNN_WINDOW_ADDR >/dev/null
+      printf "%s" "$selection" > "$CURSEL"
+    fi
+  done < "$NNN_FIFO"
+  pkill -Pe "$$"
+}
+
+if [ -f $PREVIEWPID ]; then
+  PP=$(cat "$PREVIEWPID") 
+  if ps -p $PP > /dev/null; then
+    kill "$(ps -o ppid= -p "$PP")"
+    pidkill "$PREVIEWPID"
+    rm "$PREVIEWPID" 2>/dev/null
+    exit 0
+  fi
+  rm "$PREVIEWPID" 2>/dev/null
+fi
+
+preview_fifo &
+#trap 'rm "$PREVIEWPID" 2>/dev/null' INT HUP EXIT
+exit 0

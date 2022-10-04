@@ -20,6 +20,7 @@
 }
 .app-row:selected {
     background-color: #53605c;
+    ;background-color: #503946;
 }
 .app-row:hover {
     background-color: #503946;

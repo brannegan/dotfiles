@@ -7,7 +7,7 @@
 (defpoll hour :interval "5s" "date '+%H'")
 (defpoll min :interval "5s" "date '+%M'")
 
-(defpoll VOLUME :interval "1s" `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -F' ' '{print $2 * 100}'`)
+(defpoll VOLUME :interval "1s" "scripts/vol")
 
 ;;defwidgets******************************************************************
 
@@ -59,12 +59,14 @@
 (defwidget sysinfo []
   (box :class "sysinfo" :orientation "h" :space-evenly false :halign "start"
     (button
+      :timeout "1s"
       :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/mem.toml"`
       (box :class "mem-box-inner" :space-evenly false :spacing 3
           (label :class "txt glyph" :text "")
           (label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
           (label :class "txt unit" :text "GB")))
     (button
+      :timeout "1s"
       :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/cpu.toml"`
       (box :class "cpu-box-inner" :space-evenly false :spacing 3
           (label :class "txt glyph" :text "")
@@ -198,6 +200,8 @@
                 "mpv":                      "懶",
                 "telegramdesktop":          "",
                 "org.keepassxc.KeePassXC":  "",
+                "org.pwmt.zathura":         "",
+                "Neovim":                   "",
                 "None":                     ""}')
 (defwidget wss [] 
   (box :class "wss"
@@ -228,7 +232,6 @@
 (defwindow bar
   :exclusive true
   :monitor 0
-  :windowtype "dock"
   :stacking "bg"
 	:focusable false
   :geometry (geometry :x "0"

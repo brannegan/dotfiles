@@ -3,13 +3,18 @@
 socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read _ ; do 
   ws=$(hyprctl monitors -j | jq '.[].activeWorkspace.id | tonumber')
   active_windows_addr=$(hyprctl workspaces -j | jq '[.[].lastwindow ]')
-  active_windows_info=$(hyprctl clients -j | jq --argjson addr "$active_windows_addr" 'map(select(.address | IN ($addr[])) | {id: .workspace.id, class, title}) | sort_by(.id)')
+  active_windows_info=$(hyprctl clients -j | jq --argjson addr "$active_windows_addr" \
+    'map(select(.address | IN ($addr[])) | {id: .workspace.id, class, title}) | sort_by(.id)')
 
   windows_with_empty=$(echo $active_windows_info | jq '. as $w | [
   range(1; max_by($w[].id).id+1) | . as $id | if $id | IN ($w[].id) 
                                               then $w[] | select(.id == $id) 
                                               else {id: $id, class: "None", title: "None" } 
                                               end ]')
-  echo $windows_with_empty | jq -c --arg ws $ws '[.[]|.+={"active": (.id == ($ws | tonumber))}]'
+  windows_with_vim=$(echo $windows_with_empty | jq '[ .[] | if .class == "Alacritty" and 
+                                                              (.title | test("NVIM")) 
+                                                           then {id, class: "Neovim", title } 
+                                                           else . end ]')
+  echo $windows_with_vim | jq -c --arg ws $ws '[.[]|.+={"active": (.id == ($ws | tonumber))}]'
 done
 

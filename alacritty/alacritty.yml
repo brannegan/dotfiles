@@ -13,8 +13,6 @@ window:
 
 font:
     normal:
-      #family: FiraCode Nerd Font
-      #family: Iosevka
       family: JetBrainsMono Nerd Font
       style: Regular
     bold:
@@ -26,7 +24,9 @@ font:
     bold_italic:
       family: JetBrainsMono Nerd Font
       style: Bold Italic
-
+    monospace:
+      family: JetBrainsMono Nerd Font Mono
+      style: Regular
     size: 13
 
 schemes:
@@ -92,5 +92,6 @@ shell:
   program: nu
 
 key_bindings:
-  - { key: P,                   mode: Vi, action: PasteSelection }
-  - { key: Escape, mods: Super, mode: ~Search, action: ToggleViMode }
+  - { key: P,                           mode: Vi|~Search, action: PasteSelection }
+  - { key: Escape, mods: Super,         mode: ~Search,    action: ToggleViMode }
+  - { key: F,      mods: Super|Control,                   action: ToggleFullscreen }

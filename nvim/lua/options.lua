@@ -17,7 +17,6 @@ o.timeoutlen = 500
 o.updatetime = 300
 o.colorcolumn = {100}
 o.signcolumn = "no"
---o.cmdheight = 2
 o.number = true
 o.relativenumber = true
 o.scrolloff = 8
@@ -27,10 +26,11 @@ o.splitright = true
 o.title = true
 o.showmode = false
 o.completeopt = "menuone,noselect"
-o.foldmethod = "indent"
+o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 99
-o.laststatus=3
+o.laststatus = 3
+o.cmdheight = 0
 vim.g.mapleader = ' '
 
 cmd [[
