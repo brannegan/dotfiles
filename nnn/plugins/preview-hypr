@@ -5,6 +5,7 @@ TMPDIR="${TMPDIR:-/tmp}"
 BAT_STYLE="${BAT_STYLE:-numbers}"
 BAT_THEME="${BAT_THEME:-ansi}"
 PREVIEWPID="$TMPDIR/nnn-preview-tui-previewpid"
+PREVIEW_MODE="$TMPDIR/nnn-preview-mode-flag"
 IMV_PID=0
 TERMINAL="${TERMINAL:-alacritty --hold -e}"
 NNN_WINDOW_ADDR=$(hyprctl activewindow -j | jq .address | tr -d \")
@@ -122,23 +123,22 @@ preview_fifo() {
       preview_file "$selection"
       sleep 0.1
       hyprctl dispatch focuswindow address:$NNN_WINDOW_ADDR >/dev/null
-      printf "%s" "$selection" > "$CURSEL"
     fi
   done < "$NNN_FIFO"
-  pkill -Pe "$$"
+  #pkill -Pe "$$"
 }
 
-if [ -f $PREVIEWPID ]; then
-  PP=$(cat "$PREVIEWPID") 
-  if ps -p $PP > /dev/null; then
-    kill "$(ps -o ppid= -p "$PP")"
-    pidkill "$PREVIEWPID"
-    rm "$PREVIEWPID" 2>/dev/null
-    exit 0
-  fi
-  rm "$PREVIEWPID" 2>/dev/null
+if [ -f "$PREVIEW_MODE" ]; then
+  rm "$PREVIEW_MODE"
+  pidkill "$PREVIEWPID"
+  kill $(ps -ef | rg sh.*nnn/plugins/preview-tui | head -1 | awk '{print $2}')
+  exit 0
 fi
 
+touch "$PREVIEW_MODE"
+preview_file "$PWD/$1"
+sleep 0.1
+hyprctl dispatch focuswindow address:$NNN_WINDOW_ADDR >/dev/null
 preview_fifo &
 #trap 'rm "$PREVIEWPID" 2>/dev/null' INT HUP EXIT
 exit 0
