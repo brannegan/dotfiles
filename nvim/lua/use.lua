@@ -3,10 +3,8 @@ function get_config(name)
 end
 
 return require('packer').startup(function()
-
     -- Packer can manage itself as an optional plugin
    use {'wbthomason/packer.nvim', opt = true}
-
    -- Development
    --use {'tpope/vim-fugitive'}
    use {'tpope/vim-surround'}
@@ -14,17 +12,19 @@ return require('packer').startup(function()
    use {'windwp/nvim-autopairs',
      config = get_config("autopairs")
    }
-   use "tversteeg/registers.nvim"
-  
+   use { "tversteeg/registers.nvim",
+     config = function()
+       require("registers").setup()
+     end,
+   }
    -- Color scheme
-   use {'sainnhe/gruvbox-material'}
-   use {'sainnhe/everforest'}
-   use {'NvChad/nvim-colorizer.lua',
+  use {'sainnhe/gruvbox-material'}
+  use {'sainnhe/everforest'}
+  use {'NvChad/nvim-colorizer.lua',
     config = require'colorizer'.setup()
   }
-
    -- Telescope
-   use {'nvim-telescope/telescope.nvim',
+  use {'nvim-telescope/telescope.nvim',
      requires = {
        'nvim-lua/popup.nvim',
        'nvim-lua/plenary.nvim',
@@ -32,10 +32,9 @@ return require('packer').startup(function()
        'nvim-telescope/telescope-ui-select.nvim',
      },
      config = get_config("telescope")
-   }
-
+  }
    -- Completion - use either one of this
-   use {'hrsh7th/nvim-cmp', 
+  use {'hrsh7th/nvim-cmp', 
      requires = {
        'hrsh7th/cmp-nvim-lsp',
        'hrsh7th/cmp-buffer',
@@ -43,42 +42,43 @@ return require('packer').startup(function()
        'saadparwaiz1/cmp_luasnip',
      },
      config = get_config("nvim-cmp")
-   }
-
+  }
    -- LSP for Rust
-   use {'simrat39/rust-tools.nvim',
+  use {'simrat39/rust-tools.nvim',
      ft = 'rust',
      config = get_config("rust-tools"),
      requires = { 
        'neovim/nvim-lspconfig',
-       'nvim-lua/lsp-status.nvim',
        'hrsh7th/cmp-nvim-lsp',
      },
-   }
-  
+  }
+  use { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      require('lsp_lines').setup()
+    end
+  }
+  -- LSP progress
+  use { 'j-hui/fidget.nvim',
+    config = function() 
+      require('fidget').setup{} 
+    end
+  }
    -- Snippets
-   use { 'L3MON4D3/LuaSnip' }
-
+  use { 'L3MON4D3/LuaSnip' }
    -- Better syntax
-   use {'nvim-treesitter/nvim-treesitter',
+  use {'nvim-treesitter/nvim-treesitter',
          run = ':TSUpdate',
          config = get_config("treesitter")
-   }
-    use 'nvim-treesitter/nvim-treesitter-context'
+  }
+  use { 'nvim-treesitter/nvim-treesitter-context' }
    --use {'nvim-treesitter/nvim-treesitter-textobjects'}
    --use {'nvim-treesitter/playground'}
-   use {'hoob3rt/lualine.nvim', 
+  use {'hoob3rt/lualine.nvim', 
      config = get_config("lualine")
-   }
+  }
 
    -- DAP
    -- use {'mfussenegger/nvim-dap'}
    -- use {'nvim-telescope/telescope-dap.nvim'}
    -- use {'theHamsta/nvim-dap-virtual-text'}
-  
-   -- Terminal
-   use {"akinsho/toggleterm.nvim",
-     config = get_config("toggleterm")
-   }
-
 end)

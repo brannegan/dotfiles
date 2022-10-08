@@ -1,10 +1,6 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
-capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
-
 local opts = {
   tools = { -- rust-tools options
       autoSetHints = true,
