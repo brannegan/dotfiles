@@ -1,0 +1,54 @@
+@define-color bg         #1e2327;
+@define-color bg0        #2b3339;
+@define-color bg1        #323c41;
+@define-color bg2        #3a454a;
+@define-color bg3        #445055;
+@define-color bg4        #4c555b;
+@define-color bg5        #53605c;
+@define-color bg_visual  #503946;
+@define-color bg_red     #4e3e43;
+@define-color bg_green   #404d44;
+@define-color bg_blue    #394f5a;
+@define-color bg_yellow  #4a4940;
+@define-color fg         #d3c6aa;
+@define-color black      #4b565c;
+@define-color red        #e67e80;
+@define-color green      #a7c080;
+@define-color yellow     #dbbc7f;
+@define-color blue       #7fbbb3;
+@define-color magenta    #d699b6;
+@define-color cyan       #83c092;
+@define-color white      #d3c6aa;
+
+.background {
+	background-color: @bg;
+	color: @fg;
+}
+
+list {
+  background-color: @bg;
+}
+
+headerbar {
+	background-color: @bg0;
+	background-image: None;
+}
+
+headerbar button {
+	background-color: @bg1;
+  background-image: image(@bg1);
+  color: @fg;
+}
+
+popover button {
+	background-color: @bg0;
+  background-image: image(@bg0);
+  color: @fg;
+}
+popover button:checked {
+	background-color: @bg_visual;
+  background-image: image(@bg_visual);
+  color: @fg;
+}
+
+
