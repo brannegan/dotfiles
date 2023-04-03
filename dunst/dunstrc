@@ -69,15 +69,15 @@
 
 [base16_low]
     msg_urgency = low
-    background = "#1d202166"
+    background = "#1e232766"
     foreground = "#a7c080"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#1d202166"
+    background = "#1e232766"
     foreground = "#7fbbb3"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#1d202166"
+    background = "#1e232766"
     foreground = "#e67e80"

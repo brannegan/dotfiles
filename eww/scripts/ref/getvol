@@ -1,0 +1,6 @@
+#!/bin/sh
+#amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1
+wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk -F' ' '{print $2*100}' | head -1
+#echo 80
+
+

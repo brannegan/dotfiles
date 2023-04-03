@@ -2,7 +2,7 @@ grace=4
 daemonize
 image=~/.config/wallpaper/forest-fog.jpg
 #screenshots
-fade-in=4
+#fade-in=4
 ignore-empty-password
 #effect-greyscale
 effect-blur=10x3
@@ -10,11 +10,11 @@ effect-blur=10x3
 effect-vignette=0.1:0.7
 indicator
 clock
-text-color=#1d2021
-inside-color=#a7c080
+text-color=#1e2327
+inside-color=#a7c080AA
 inside-ver-color=#7fbbb3
 inside-wrong-color=#e67e80
-ring-color=#83c092
+ring-color=#83c092AA
 ring-ver-color=#394f5a
 ring-wrong-color=#503946
 key-hl-color=#dbbc7f

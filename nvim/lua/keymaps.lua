@@ -17,16 +17,9 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
 -- Lsp
 vim.keymap.set('n', '<leader>ru', '<cmd>RustRunnables<CR>')
-vim.keymap.set('n', '<F1>',       vim.lsp.buf.formatting)
-vim.keymap.set('n', '<F2>',       vim.lsp.buf.rename)
-vim.keymap.set('n', 'gd',         vim.lsp.buf.definition)
-vim.keymap.set('n', 'gt',         vim.lsp.buf.type_definition)
-vim.keymap.set('n', '<leader>a',  vim.lsp.buf.code_action)
-vim.keymap.set('n', '<leader>aa', vim.lsp.buf.range_code_action)
-vim.keymap.set('n', '<leader>h',  vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.open_float(nil, {scope = "line"}) end)
+--vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.open_float(nil, {scope = "line"}) end)
 
 
 vim.cmd(':command! WQ wq')

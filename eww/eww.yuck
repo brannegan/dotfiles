@@ -1,14 +1,30 @@
 ;; ** Variables ***********************************************************************
 ;; all the deffpolls
 
-(defpoll year :interval "10h" "date +%Y")
-(defpoll month :interval "10m" "date +%m")
-(defpoll day :interval "5m" "date +%e")
-(defpoll hour :interval "5s" "date '+%H'")
-(defpoll min :interval "5s" "date '+%M'")
+(defpoll    year                :interval "10h" `date +%Y`)
+(defpoll    month               :interval "10m" `date +%m`)
+(defpoll    day                 :interval "5m"  `date +%d`)
+(defpoll    hour                :interval "5s"  `date '+%H'`)
+(defpoll    min                 :interval "5s"  `date '+%M'`)
+(defpoll    wifi_icon           :interval "5s"  `scripts/wifi icon`)
+(defpoll    wifi_ssid           :interval "5s"  `scripts/wifi ssid`)
+(defpoll    bluetooth_icon      :interval "3s"  `scripts/bt icon`)
+(defpoll    bluetooth_connected :interval "3s"  `scripts/bt connected`)
+(defpoll    VOLUME              :interval "1s"  `scripts/vol`)
 
-(defpoll VOLUME :interval "1s" "scripts/vol")
-
+(defvar icons '{"Alacritty":                "",
+                "imv":                      "",
+                "firefox":                  "",
+                "libreoffice-writer":       "",
+                "mpv":                      "󰨜",
+                "org.keepassxc.KeePassXC":  "󰯅",
+                "org.pwmt.zathura":         "",
+                "Neovim":                   "",
+                "simple-scan":              "󰚫",
+                "org.telegram.desktop":     "",
+                "virt-manager":             "",
+                "zoom":                     "󰰸",
+                "None":                     ""}')
 ;;defwidgets******************************************************************
 
 (defwidget bar []
@@ -45,8 +61,13 @@
     :halign "end"
     :class "right_modules"
     (usb)
-    (volume)
     (mail)
+    (bt)
+    (sep)
+    (wifi)
+    (sep)
+    (volume)
+    (sep)
     (clock)
 ))
 
@@ -58,20 +79,21 @@
 
 (defwidget sysinfo []
   (box :class "sysinfo" :orientation "h" :space-evenly false :halign "start"
-    (button
-      :timeout "1s"
-      :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/mem.toml"`
-      (box :class "mem-box-inner" :space-evenly false :spacing 3
-          (label :class "txt glyph" :text "")
-          (label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
-          (label :class "txt unit" :text "GB")))
-    (button
-      :timeout "1s"
-      :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/cpu.toml"`
-      (box :class "cpu-box-inner" :space-evenly false :spacing 3
-          (label :class "txt glyph" :text "")
-          (label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
-          (label :class "txt unit" :text "%")))
+    (box :class "meminfo" :orientation "h" :space-evenly false :halign "start"
+        (button :timeout "1s" :class "hover txt"
+        :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/mem.toml"`
+        (box :class "mem-box-inner" :space-evenly false :spacing 3
+          (label :text " ")
+          (label :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
+          (label :text "GB"))))
+    (sep)
+    (box :class "cpuinfo" :orientation "h" :space-evenly false :halign "start"
+        (button :timeout "1s" :class "hover txt"
+        :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config ~/.config/bottom/cpu.toml"`
+        (box :class "cpu-box-inner" :space-evenly false :spacing 3
+          (label :text "󰻠 ")
+          (label :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
+          (label :text "%"))))
 ))
 
 (defvar reveal_pow false)
@@ -91,8 +113,8 @@
       (button :class "hover txt glyph" :onclick "systemctl poweroff" :tooltip "Poweroff"      "")
       (box :space-evenly true
         (button :class "hover txt glyph" :onclick "systemctl suspend"  :tooltip "Suspend"     "")
-        (button :class "hover txt glyph" :onclick "systemctl reboot"   :tooltip "Reboot"      "ﯩ")
-        (button :class "hover txt glyph" :onclick "hyprctl dispatch exit 0" :tooltip "logoff" ""))
+        (button :class "hover txt glyph" :onclick "systemctl reboot"   :tooltip "Reboot"      "󰑓")
+        (button :class "hover txt glyph" :onclick "hyprctl dispatch exit 0" :tooltip "logoff" "󰍃"))
       (sep)
 )))
 
@@ -167,12 +189,37 @@
         :orientation "h"
         :space-evenly false
         :halign "end"
-        (label :class "txt glyph" :text "")
+        (label :class "txt glyph" :text "")
         (label :class "txt" :text "${mail_counter}")))
 ))
 
+(defvar reveal_wifi false)
+(defwidget wifi []
+  (box :class "wifi"
+    :orientation "h"
+    :space-evenly true
+    :halign "center"
+    (revealer-on-hover :var reveal_wifi
+        :varname "reveal_wifi"
+        :icon "${wifi_icon}"
+        :transition "slideleft"
+        (button :class "hover txt glyph" :timeout "1s" :onclick "scripts/wifi toggle" "${wifi_icon}")
+        (label :class "ssid" :text "${wifi_ssid}")
+    )
+))
+
+(defwidget bt []
+  (box :class "bt"
+    :orientation "h"
+    :space-evenly true
+    :halign "center"
+    (button :class "hover txt " :timeout "1s"
+    :onclick "scripts/bt toggle"
+    :tooltip "${bluetooth_icon}" "${bluetooth_icon}")
+))
+
 (defwidget clock []
-  (box :class "clock"
+  (box 
     :orientation "h"
     :space-evenly false
     :halign "end"
@@ -180,37 +227,20 @@
       :orientation "h"
       :space-evenly false
       :halign "end"
-      (label :class "txt glyph" :text "")
+      (label :class "txt glyph" :text "󰅐")
       (label :class "txt" :text "${hour}:${min}"))
-    (button :onclick "eww open --toggle calendar"
-      (box :class "date-box"
-        :orientation "h"
-        :space-evenly false
-        :halign "end"
-        (label :class "txt glyph" :text "")
-        (label :class "txt" :text "${day}.${month}")))
-))
-
-;(deflisten workspace "scripts/workspace")
-;(defwidget workspaces [] (literal :content workspace))
+    (sep)
+    (button :onclick "eww open --toggle calendar" :class "hover txt clock" " ${day}.${month}"))
+)
 
 (deflisten wss_json "scripts/wss")
-(defvar icons '{"Alacritty":                "",
-                "firefox":                  "",
-                "mpv":                      "懶",
-                "telegramdesktop":          "",
-                "org.keepassxc.KeePassXC":  "",
-                "org.pwmt.zathura":         "",
-                "Neovim":                   "",
-                "simple-scan":              "ﮩ",
-                "None":                     ""}')
 (defwidget wss [] 
   (box :class "wss"
     :orientation "h"
     :space-evenly false
     :halign "end"
     (for ws in wss_json
-      (button :class { ws.active ? "txt glyph" : "inactive glyph"} 
+      (button :class { ws.active ? "txt glyph" : " hover inactive glyph"} 
               :timeout "1s"
               :onclick "hyprctl dispatch workspace ${ws.id}"
               "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))

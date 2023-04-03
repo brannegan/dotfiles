@@ -3,41 +3,35 @@
 	font-family: JetBrainsMono Nerd Font;
   font-size: 18px;
 }
-
 @import "colors.scss";
 .bar {
 	background-color: rgba($bg,0.96);
   border: 2px solid rgba($cyan, 0.67);
   border-top: 0px;
-  border-radius: 0px 0px 5px 5px;
-	//background: linear-gradient(to right, #121212,#181818,#050505,#181818,#121212);
-  //border: 2px solid $red;
+  border-radius: 0px 0px 8px 8px;
 }
 .left_modules {
-  margin-left: 5px;
+  margin-left: 8px;
   //border: 2px solid $magenta;
 }
 .center_modules {
-  //border: 2px solid $magenta;
 }
 .right_modules {
-  //border: 2px solid $magenta;
-  margin-right: 5px;
+  margin-right: 12px;
 }
 .sysinfo {
-  //border: 2px solid $magenta;
 }
 .volume {
-  //border: 2px solid $magenta;
 }
 .mail {
-  //border: 2px solid $magenta;
-  //margin-left: 10px;
-  //padding:  0px 10px 0px 10px;
+}
+.wifi {
+}
+.bt {
+  padding:  0px 5px 0px 5px;
 }
 .clock {
-  //margin-left: 10px
-  //padding:  0px 10px 0px 10px;
+  padding:  0px 0px 0px 5px;
 }
 .calendar {
     font-size: 14px;
@@ -47,15 +41,17 @@
     border-radius: 0px 0px 20px 20px;
     padding: 10px;
 }
-
 .hover-power {
-  color: $green;
 }
 .txt {
   color: $green;
 }
+.ssid {
+  color: $blue;
+  font-size: 14px;
+}
 .glyph {
-  padding:  0px 10px 0px 10px;
+  padding:  0px 10px 0px 5px;
 }
 .inactive {
   color: $bg5;
@@ -63,33 +59,6 @@
 .sep {
   color: $bg_blue;
 }
-
-.0 , .01, .02, .03, .04, .05, .06,
-.011, .022, .033, .044, .055, .066{
-  margin: 0px 0px 0px 0px;
-}
-
-/* Unoccupied */
-.0 {
-	color: $green;
-}
-
-/* Occupied */
-.01, .02, .03, .04, .05, .06, .07, .08, .09 {
-	color: $yellow;
-}
-
-/* Focused */
-.011, .022, .033, .044, .055, .066, .077, .088, .099{
-	color: $red;
-	font-weight:bold;
-}
-
-.module {
-    margin: 0px 0px 0px 0px;
-    border-radius: 10px 10px 0px 10px;
-}
-
 scale trough {
   all: unset;
   background-color: $bg_blue;
@@ -104,29 +73,23 @@ scale trough highlight {
   border-radius: 10px;
 }
 button:hover.hover {
-  color: $black;
-  background: $green;
+  color: $red;
 }
-
 calendar:selected {
   color: $bg;
   background-color: $red;
 }
-
 calendar.header {
   color: $blue;
   font-weight: bold;
 }
-
 calendar.button {
   color: $yellow;
 }
-
 calendar.highlight {
   color: $blue;
   font-weight: bold;
 }
-
 calendar:indeterminate {
   color: $black;
 }

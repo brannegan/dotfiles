@@ -87,10 +87,16 @@ cursor:
       shape: Block
     unfocused_hollow: true
 
-shell:
-  program: nu
+      #shell:
+      #  program: nu
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: false
 
 key_bindings:
   - { key: P,                           mode: Vi|~Search, action: PasteSelection }
+  - { key: Y,                           mode: Vi|~Search, action: CopySelection }
+  - { key: Y,                           mode: Vi|~Search, action: ClearSelection }
   - { key: Escape, mods: Super,         mode: ~Search,    action: ToggleViMode }
   - { key: F,      mods: Super|Control,                   action: ToggleFullscreen }

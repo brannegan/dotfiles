@@ -1,0 +1,12 @@
+# Dotfiles
+- Bar: eww
+- Browser: firefox userChrome.css
+- Editor: neovim
+- File Manager: nnn
+- Notification: dunst
+- Readers: zathura
+- Shell: zsh, nushell
+- Terminal: alacritty
+- Terminal multiplexer: tmux, zellij
+- WM: hyprland
+- Utils: bottom, swayidle, swaylock ...

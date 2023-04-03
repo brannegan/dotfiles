@@ -5,13 +5,14 @@ alias colordiff=~/bin/colordiff
 alias sudo="sudo "
 alias reload-shell="exec /proc/self/exe --login"
 if command -v exa >/dev/null 2>&1; then
-  alias ls="exa"
-  alias ll="exa -l"
-  alias lll="exa -la"
+  alias ls="exa --group-directories-first"
+  alias ll="exa -l --group-directories-first"
+  alias la="exa -la --group-directories-first"
+  alias lat="exa -laT"
 else
   alias ls="LC_COLLATE=C ls --color=auto -hF --group-directories-first"
   alias la="ls -A"
-  alias ll="ls -Al"
+  alias lla="ls -Al"
   alias LS=sl
 fi 
 alias pacman="sudo pacman --color=auto"

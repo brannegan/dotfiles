@@ -1,28 +1,21 @@
--- Auto install packer.nvim if not exists
-local fn = vim.fn
-local execute = vim.api.nvim_command
-local autocmd = vim.api.nvim_create_autocmd
-local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim ' ..
-                install_path)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-vim.cmd [[packadd packer.nvim]]
--- Recompile packer on write
-autocmd("BufWritePost", {pattern = "use.lua", callback = function() require'packer'.compile() end})
+vim.opt.rtp:prepend(lazypath)
 
 -- Sensible defaults
 require('options')
-
--- Install plugins
-require('use')
-
 -- Key mappings
 require('keymaps')
+-- Install plugins
+require('lazy').setup('plugins')
 
--- Colorscheme
-require('colorscheme')
-
--- DAP
--- require('dbg')
 
