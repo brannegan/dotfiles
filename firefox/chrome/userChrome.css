@@ -10,6 +10,12 @@ See the above repository for updates as well as full license text. */
 urlbar_popup_full_width.css is VERY MUCH recommended for Firefox 71+ because of new urlbar popup
 */
 
+
+#browser {
+	-moz-box-ordinal-group: 0 !important;
+	order: 0 !important;
+}
+
 :root[uidensity="compact"]{
   --tab-block-margin: 2px !important;
 }
@@ -52,12 +58,12 @@ urlbar_popup_full_width.css is VERY MUCH recommended for Firefox 71+ because of 
 }
 
 /* Window drag space  */
-:root[tabsintitlebar="true"] #nav-bar{ padding-left: 24px !important }
+:root[tabsintitlebar="true"] #nav-bar{ padding-left: 0px !important }
 
 /* Rules specific to window controls on right layout */
 @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled"){
   .titlebar-buttonbox-container{ position: fixed; display: block; left: 0px; z-index: 3; }
-  :root[tabsintitlebar="true"] #nav-bar{ padding-left: 96px !important; padding-right: 0px !important; }
+  :root[tabsintitlebar="true"] #nav-bar{ padding-left: 0px !important; padding-right: 0px !important; }
 }
 
 /* 1px margin on touch density causes tabs to be too high */
@@ -75,3 +81,56 @@ urlbar_popup_full_width.css is VERY MUCH recommended for Firefox 71+ because of 
 #forward-button[disabled="true"] { display: none; }
 #stop-button[disabled="true"] { display: none; }
 
+#unified-extensions-button, #unified-extensions-button > .toolbarbutton-icon{
+width: 0px !important;
+padding: 0px !important;
+}
+
+#navigator-toolbox-background {
+	-moz-box-ordinal-group: 1 !important;
+	order: 1 !important;
+}
+
+/* adjust paddings */
+*|*:root[sizemode="normal"] #browser {
+	padding-top: 0 !important;
+}
+
+/* hide tab toolbar when fullscreen */
+#nav-bar[inFullscreen],
+#TabsToolbar[inFullscreen] {
+	display: none;
+}
+
+/* hide titlebar buttons */
+#TabsToolbar > .titlebar-buttonbox-container {
+	display: none !important;
+}
+
+#alltabs-button {
+    display: none !important;
+}
+
+/*fix pop-ups opening below window*/
+#urlbar[open]{
+  display: flex !important;
+  flex-direction: column-reverse; /* use 'column' if you want to type the URL in center*/
+  bottom: -2px !important;
+  top: auto !important;
+}
+
+*|*:root[sizemode="normal"] #browser {
+	border-top: .5px solid AccentColor !important;
+}
+*|*:root[sizemode="normal"]:-moz-window-inactive #browser {
+	border-top-color: rgb(30,35,39) !important;
+}
+
+/* make toolbar border persist on fullscreen */
+*|*:root[sizemode="maximized"] #navigator-toolbox {
+  border-top: .5px solid AccentColor !important;
+	border-top-color: rgb(30,35,39) !important;
+  border-bottom: .5px solid AccentColor !important;
+}
+/*.urlbarView-body-inner { border-top: none !important; }*/
+/*.urlbarView { display: none !important; }*/ /* uncomment this to hidden address bar suggestions */
