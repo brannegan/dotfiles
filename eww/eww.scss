@@ -5,10 +5,10 @@
 }
 @import "colors.scss";
 .bar {
-	background-color: rgba($bg,0.96);
-  border: 2px solid rgba($cyan, 0.67);
-  border-top: 0px;
-  border-radius: 0px 0px 8px 8px;
+  background-color: rgba($bg,0.96);
+  border: 1px solid rgba($cyan, 0.67);
+  border-bottom: 0px;
+  border-radius: 8px 8px 0px 0px;
 }
 .left_modules {
   margin-left: 8px;
@@ -37,8 +37,8 @@
     font-size: 14px;
     background-color: rgba($bg, 0.4);
     color: $green;
-    border: 2px solid rgba($cyan, 0.67);
-    border-radius: 0px 0px 20px 20px;
+    border: 1px solid rgba($cyan, 0.67);
+    border-radius: 8px 8px 8px 8px;
     padding: 10px;
 }
 .hover-power {

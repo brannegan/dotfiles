@@ -268,8 +268,8 @@
   :geometry (geometry :x "0"
                       :y "0"
                       :width "1910px"
-                      :height "10px"
-                      :anchor "top center")
+                      :height "0px"
+                      :anchor "bottom center")
   (bar))
 (defwindow calendar
   :monitor 0
@@ -278,6 +278,6 @@
                       :y "5px"
                       :width "400px"
                       :height "100px"
-                      :anchor "top right")
+                      :anchor "bottom right")
   (calendar_))
 
