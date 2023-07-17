@@ -113,14 +113,14 @@ padding: 0px !important;
 
 /*fix pop-ups opening below window*/
 #urlbar[open]{
-  display: flex !important;
-  flex-direction: column-reverse; /* use 'column' if you want to type the URL in center*/
-  bottom: -2px !important;
-  top: auto !important;
+    display: flex !important;
+    flex-direction: column-reverse; /* use 'column' if you want to type the URL in center*/
+    bottom: -2px !important;
+    top: auto !important;
 }
 
 *|*:root[sizemode="normal"] #browser {
-	border-top: .5px solid AccentColor !important;
+	border-top: .5px !important;
 }
 *|*:root[sizemode="normal"]:-moz-window-inactive #browser {
 	border-top-color: rgb(30,35,39) !important;
@@ -128,9 +128,9 @@ padding: 0px !important;
 
 /* make toolbar border persist on fullscreen */
 *|*:root[sizemode="maximized"] #navigator-toolbox {
-  border-top: .5px solid AccentColor !important;
-	border-top-color: rgb(30,35,39) !important;
-  border-bottom: .5px solid AccentColor !important;
+    border-top: .5px !important;
+    border-top-color: rgb(30,35,39) !important;
+    border-bottom: .5px !important;
 }
 /*.urlbarView-body-inner { border-top: none !important; }*/
 /*.urlbarView { display: none !important; }*/ /* uncomment this to hidden address bar suggestions */
