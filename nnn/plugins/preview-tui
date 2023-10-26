@@ -107,7 +107,7 @@ image_preview() {
     imv-msg $IMV_PID open "$1"
   else 
     pidkill "$PREVIEWPID"
-    imv "$1" &
+    imv-dir "$1" &
     IMV_PID=$!
     printf "%s" "$!" > "$PREVIEWPID"
   fi

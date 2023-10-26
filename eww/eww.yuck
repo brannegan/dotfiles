@@ -11,6 +11,10 @@
 (defpoll    bluetooth_icon      :interval "3s"  `scripts/bt icon`)
 (defpoll    bluetooth_connected :interval "3s"  `scripts/bt connected`)
 (defpoll    VOLUME              :interval "1s"  `scripts/vol`)
+(defvar bt_headset "")
+(defvar usb_devices "[]")
+(defvar reveal_mail false)
+(defvar reveal_wifi false)
 
 (defvar icons '{"Alacritty":                "",
                 "imv":                      "",
@@ -61,20 +65,19 @@
     :halign "end"
     :class "right_modules"
     (usb)
+    (headset)
     (mail)
     (bt)
-    (sep)
     (wifi)
-    (sep)
     (volume)
-    (sep)
     (clock)
 ))
 
 (defwidget sep []
   (box 
-    :vexpand "false"
-    :hexpand "false"
+    :vexpand false
+    :hexpand false
+    :space-evenly false
     (label :class "sep" :text "|")))
 
 (defwidget sysinfo []
@@ -144,7 +147,7 @@
              :min 0
              )
       (label :class "txt" :text "${VOLUME}%")
-    )))
+    )(sep)))
 
 (defwidget revealer-on-hover [var varname ?class ?duration ?transition]
   (box :class "${class} revealer-on-hover"
@@ -155,7 +158,8 @@
               :onhoverlost "eww update ${varname}=false"
       (box :space-evenly false
         (children :nth 0)
-        (revealer :reveal var
+        (revealer 
+                  :reveal var
                   :transition {transition ?: "slideright"}
                   :duration {duration ?: "500ms"}
           (children :nth 1))
@@ -163,26 +167,41 @@
         (children :nth 2)
         ))))
 
-(defvar usb_devices "[]")
+(defwidget headset [] 
+  (box :class "headset"
+    :orientation "h"
+    :visible { strlength(bt_headset) > 0}
+    :space-evenly false
+    :halign "end"
+      (button :class "hover txt glyph" :timeout "1s" :onclick "scripts/headset toggle" 
+        { bt_headset.profile == "a2dp-sink" ? "󰋋" : "󰋎"}
+      )
+      (sep)
+))
 (defwidget usb [] 
   (box :class "usb"
     :orientation "h"
     :space-evenly false
     :halign "end"
+    :visible { arraylength(usb_devices) > 0 }
     (for usb_device in usb_devices
-      (button :class "txt glyph" :timeout "1s"
-      :onclick "udisksctl unmount -b ${usb_device} && udisksctl power-off -b ${usb_device}" 
-      :tooltip "eject " ""))
+    (box 
+      :orientation "h"
+      :space-evenly false
+      :halign "end"
+      (button :class "hover txt glyph" :timeout "1s"
+      :onclick "udisksctl unmount -b ${usb_device} && udisksctl power-off -b ${usb_device}" "")
+      (sep)))
 ))
 
-(defvar reveal_mail false)
 (deflisten mail_counter "scripts/mail")
 (defwidget mail [] 
   (box :class "mail"
     :orientation "h"
     :space-evenly false
     :halign "end"
-    (revealer :reveal { mail_counter > 0 }
+    (revealer 
+              :reveal { mail_counter > 0 }
               :transition "slideright"
               :duration "500ms"
       (box :class "mail-box" 
@@ -193,11 +212,10 @@
         (label :class "txt" :text "${mail_counter}")))
 ))
 
-(defvar reveal_wifi false)
 (defwidget wifi []
   (box :class "wifi"
     :orientation "h"
-    :space-evenly true
+    :space-evenly false
     :halign "center"
     (revealer-on-hover :var reveal_wifi
         :varname "reveal_wifi"
@@ -205,18 +223,17 @@
         :transition "slideleft"
         (button :class "hover txt glyph" :timeout "1s" :onclick "scripts/wifi toggle" "${wifi_icon}")
         (label :class "ssid" :text "${wifi_ssid}")
-    )
-))
+    )(sep)))
 
 (defwidget bt []
   (box :class "bt"
     :orientation "h"
-    :space-evenly true
-    :halign "center"
+    :space-evenly false
+    :halign "end"
     (button :class "hover txt " :timeout "1s"
-    :onclick "scripts/bt toggle"
-    :tooltip "${bluetooth_icon}" "${bluetooth_icon}")
-))
+    :onclick "scripts/bt toggle" "${bluetooth_icon}")
+    (sep)
+    ))
 
 (defwidget clock []
   (box 
@@ -240,7 +257,7 @@
     :space-evenly false
     :halign "end"
     (for ws in wss_json
-      (button :class { ws.active ? "txt glyph" : " hover inactive glyph"} 
+      (button :class { ws.active ? "txt glyph" : "hover inactive glyph"} 
               :timeout "1s"
               :onclick "hyprctl dispatch workspace ${ws.id}"
               "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))

@@ -13,8 +13,9 @@ return {
             vim.cmd([[colorscheme everforest]])
         end,
     },
-    { 'tpope/vim-surround'},
-    { 'tpope/vim-repeat'},
+    { 'tpope/vim-surround' },
+    { 'tpope/vim-repeat' },
+    { 'tpope/vim-fugitive' },
     { 'windwp/nvim-autopairs', config = true },
     { 'tversteeg/registers.nvim', config = true },
     { 'NvChad/nvim-colorizer.lua', config = true },

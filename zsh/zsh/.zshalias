@@ -31,3 +31,5 @@ alias gt='git tag'
 alias gch='git checkout'
 
 alias cd="cd >/dev/null"
+
+alias nnn='nnn -HUde'

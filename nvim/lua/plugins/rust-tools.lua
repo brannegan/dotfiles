@@ -7,7 +7,7 @@ return { "simrat39/rust-tools.nvim",
     init = function() 
         vim.opt.foldmethod = "expr"
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        vim.api.nvim_create_autocmd("BufWritePre ", {
+        vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*.rs",
             callback = function()
                 for _, client in ipairs(vim.lsp.get_active_clients()) do

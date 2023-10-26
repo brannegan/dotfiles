@@ -1,4 +1,4 @@
 timeout 300 'swaylock -f -C ~/.config/swaylock/config'
 timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' 
-timeout 1500 'systemctl suspend' 
+timeout 3600 'systemctl suspend' 
 before-sleep 'swaylock -C ~/.config/swaylock/config'

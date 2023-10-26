@@ -1,11 +1,11 @@
 * {
   all: unset; //Unsets everything so you can style everything from scratch
-	font-family: JetBrainsMono Nerd Font;
+  font-family: JetBrainsMono Nerd Font;
   font-size: 18px;
 }
 @import "colors.scss";
 .bar {
-	background-color: rgba($bg,0.96);
+  background-color: rgba($bg,0.96);
   border: 2px solid rgba($cyan, 0.67);
   border-top: 0px;
   border-radius: 0px 0px 8px 8px;
@@ -19,27 +19,23 @@
 .right_modules {
   margin-right: 12px;
 }
-.sysinfo {
-}
-.volume {
-}
-.mail {
-}
-.wifi {
-}
-.bt {
-  padding:  0px 5px 0px 5px;
-}
+.sysinfo { }
+.volume { }
+.mail { }
+.wifi { }
+.headset { }
+.bt { }
+.usb { }
 .clock {
   padding:  0px 0px 0px 5px;
 }
 .calendar {
-    font-size: 14px;
-    background-color: rgba($bg, 0.4);
-    color: $green;
-    border: 2px solid rgba($cyan, 0.67);
-    border-radius: 0px 0px 20px 20px;
-    padding: 10px;
+  font-size: 14px;
+  background-color: rgba($bg, 0.4);
+  color: $green;
+  border: 2px solid rgba($cyan, 0.67);
+  border-radius: 0px 0px 20px 20px;
+  padding: 10px;
 }
 .hover-power {
 }
@@ -59,6 +55,9 @@
 .sep {
   color: $bg_blue;
 }
+button:hover.hover {
+  color: $red;
+}
 scale trough {
   all: unset;
   background-color: $bg_blue;
@@ -71,9 +70,6 @@ scale trough highlight {
   all: unset;
   background-color: $red;
   border-radius: 10px;
-}
-button:hover.hover {
-  color: $red;
 }
 calendar:selected {
   color: $bg;
