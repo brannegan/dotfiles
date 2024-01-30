@@ -16,6 +16,7 @@ return {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
     { 'tpope/vim-fugitive' },
+    { 'lewis6991/gitsigns.nvim', config = true },
     { 'windwp/nvim-autopairs', config = true },
     { 'tversteeg/registers.nvim', config = true },
     { 'NvChad/nvim-colorizer.lua', config = true },

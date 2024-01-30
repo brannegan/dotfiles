@@ -209,7 +209,7 @@
         :space-evenly false
         :halign "end"
         (label :class "txt glyph" :text "")
-        (label :class "txt" :text "${mail_counter}")))
+        (label :class "txt" :text "${mail_counter}")(sep)))
 ))
 
 (defwidget wifi []
@@ -247,7 +247,8 @@
       (label :class "txt glyph" :text "󰅐")
       (label :class "txt" :text "${hour}:${min}"))
     (sep)
-    (button :onclick "eww open --toggle calendar" :class "hover txt clock" " ${day}.${month}"))
+    
+    (button :onclick `eww open --toggle calendar` :class "hover txt clock" " ${day}.${month}"))
 )
 
 (deflisten wss_json "scripts/wss")

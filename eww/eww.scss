@@ -1,6 +1,6 @@
 * {
   all: unset; //Unsets everything so you can style everything from scratch
-  font-family: JetBrainsMono Nerd Font;
+  font-family: JetBrainsMono NF;
   font-size: 18px;
 }
 @import "colors.scss";
@@ -12,20 +12,13 @@
 }
 .left_modules {
   margin-left: 8px;
-  //border: 2px solid $magenta;
 }
 .center_modules {
 }
+//border: 2px solid $magenta;
 .right_modules {
   margin-right: 12px;
 }
-.sysinfo { }
-.volume { }
-.mail { }
-.wifi { }
-.headset { }
-.bt { }
-.usb { }
 .clock {
   padding:  0px 0px 0px 5px;
 }
@@ -36,8 +29,6 @@
   border: 2px solid rgba($cyan, 0.67);
   border-radius: 0px 0px 20px 20px;
   padding: 10px;
-}
-.hover-power {
 }
 .txt {
   color: $green;

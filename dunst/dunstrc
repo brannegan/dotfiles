@@ -20,7 +20,7 @@
     idle_threshold = 120
     corner_radius = 3
 
-    font = JetBrainsMono Nerd Font 13
+    font = JetBrainsMono NF 13
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"
