@@ -1,9 +1,5 @@
---function get_config(name)
---    return string.format('require("plugins/%s")', name)
---end
 
 return {
-    -- Color scheme
     { 'sainnhe/everforest',
         lazy = false,
         priority = 1000,
@@ -19,15 +15,13 @@ return {
     { 'windwp/nvim-autopairs', config = true },
     { 'tversteeg/registers.nvim', config = true },
     { 'NvChad/nvim-colorizer.lua', config = true },
-    -- Completion - use either one of this
-    -- Snippets
+    {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
     { 'L3MON4D3/LuaSnip' },
-    -- Better syntax
     { 'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = { 'nvim-treesitter/nvim-treesitter-context' },
         opts = {
-            ensure_installed = { "rust", "c", "cpp", "python", "toml", "query", "lua" },
+            ensure_installed = { "rust", "c", "cpp", "python", "toml", "query", "lua", "markdown" },
             highlight = {
                 enable = true,
             },
