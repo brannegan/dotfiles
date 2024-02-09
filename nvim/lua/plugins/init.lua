@@ -15,7 +15,7 @@ return {
     { 'windwp/nvim-autopairs', config = true },
     { 'tversteeg/registers.nvim', config = true },
     { 'NvChad/nvim-colorizer.lua', config = true },
-    {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
+    { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow'},
     { 'L3MON4D3/LuaSnip' },
     { 'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
