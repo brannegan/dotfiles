@@ -3,11 +3,13 @@
 alias colordiff=~/bin/colordiff
 ##alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias sudo="sudo "
+alias mpvf='mpv "$(fzf -q Videos/)"'
 alias reload-shell="exec /proc/self/exe --login"
 if command -v exa >/dev/null 2>&1; then
   alias ls="eza --group-directories-first"
   alias ll="eza --long --group-directories-first"
   alias la="eza --long --all --group-directories-first"
+  alias lart="eza --long --all --group-directories-first --sort modified"
   alias lat="eza --long --all --tree --level 3 --git-ignore"
 else
   alias ls="LC_COLLATE=C ls --color=auto -hF --group-directories-first"

@@ -29,6 +29,7 @@
                 "org.telegram.desktop":     "",
                 "virt-manager":             "",
                 "zoom":                     "󰰸",
+                "Yandex-browser":           "",
                 "None":                     ""}')
 ;;defwidgets******************************************************************
 
@@ -249,8 +250,10 @@
       (label :class "txt" :text "${hour}:${min}"))
     (sep)
     
-    (button :onclick `eww open --toggle calendar` :class "hover txt clock" " ${day}.${month}"))
-)
+    (box :class "calendar-box" :orientation "h" :space-evenly false :halign "start"
+     (button :timeout "1s" :class "hover txt clock" 
+     :onclick `hyprctl dispatch exec "eww open --toggle calendar"` " ${day}.${month}"))
+))
 
 (deflisten wss_json "scripts/wss")
 (defwidget wss [] 
