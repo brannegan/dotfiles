@@ -116,12 +116,14 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
 --marker='+'
 --ansi
 --tabstop=4
---bind=tab:down,btab:up,ctrl-space:toggle,ctrl-p:toggle-preview
+--bind=ctrl-space:toggle,ctrl-p:toggle-preview
 --color=fg:#d3c6aa,bg:#1e2327,hl:#e67e80
 --color=fg+:#dbbc7f,bg+:#4c3743,hl+:#e67e80
 --color=info:#dbbc7f,prompt:#a7c080,pointer:#7fbbb3
 --color=marker:#d3c6aa,spinner:#7fbbb3,header:#d699b6"
 
+#--bind=tab:down,btab:up,ctrl-space:toggle,ctrl-p:toggle-preview
+#
 export FZF_CTRL_R_OPTS="--color=fg:#4b565c"
 function ssh() {
   if [ "$#" -ne "0" ]; then
