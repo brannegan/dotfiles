@@ -5,24 +5,19 @@
 }
 @import "colors.scss";
 .bar {
+    //
+}
+.modules {
   background-color: rgba($bg,0.96);
   border: 2px solid rgba($cyan, 0.67);
   border-top: 0px;
   border-radius: 0px 0px 8px 8px;
-}
-.left_modules {
-  margin-left: 8px;
-}
-.center_modules {
-}
-//border: 2px solid $magenta;
-.right_modules {
-  margin-right: 12px;
+  padding: 0px 10px 0px 10px;
 }
 .clock {
   padding:  0px 0px 0px 5px;
 }
-.calendar {
+.calendar_widget {
   font-size: 14px;
   background-color: rgba($bg, 0.4);
   color: $green;
@@ -45,6 +40,8 @@
 }
 .sep {
   color: $bg_blue;
+  padding: 0px;
+  margin: 0px;
 }
 button:hover.hover {
   color: $red;

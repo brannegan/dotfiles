@@ -34,8 +34,7 @@
 ;;defwidgets******************************************************************
 
 (defwidget bar []
-	;;(centerbox :style "background-image: url('${BARIMG}');"
-	(centerbox
+	(centerbox :class "cbox"
     (left)
     (center)
     (right)
@@ -46,7 +45,7 @@
     :space-evenly false  
     :halign "start"
     :valign "start"
-    :class "left_modules"
+    :class "modules"
     (power)
     (sysinfo)
 ))
@@ -56,7 +55,7 @@
     :space-evenly false  
     :halign "center"
     :valign "center"
-    :class "center_modules"
+    :class "modules"
     ;(workspaces)
     (wss)
 ))
@@ -65,7 +64,7 @@
 	(box :orientation "h"
     :space-evenly false
     :halign "end"
-    :class "right_modules"
+    :class "modules"
     (usb)
     (headset)
     (mail)
@@ -76,10 +75,11 @@
 ))
 
 (defwidget sep []
-  (box 
+  (box
+    :class "sep"
     :vexpand false
     :hexpand false
-    :space-evenly false
+    :space-evenly true
     (label :class "sep" :text "|")))
 
 (defwidget sysinfo []
@@ -251,26 +251,29 @@
     (sep)
     
     (box :class "calendar-box" :orientation "h" :space-evenly false :halign "start"
-     (button :timeout "1s" :class "hover txt clock" 
-     :onclick `hyprctl dispatch exec "eww open --toggle calendar"` " ${day}.${month}"))
+     (button :class "hover txt clock" 
+             :timeout "1s" 
+             :onclick "sleep 0.1 && eww open --toggle calendar" 
+             " ${day}.${month}"))
 ))
 
 (deflisten wss_json "scripts/wss")
 (defwidget wss [] 
-  (box :class "wss"
-    :orientation "h"
-    :space-evenly false
-    :halign "end"
+  (box :class "wss" :space-evenly false
+    (box :space-evenly false 
     (for ws in wss_json
-      (button :class { ws.active ? "txt glyph" : "hover inactive glyph"} 
+      (box :space-evenly false 
+        (label :class "inactive" :text "•")
+        (button :class { ws.active ? "txt glyph" : "hover inactive glyph"} 
               :timeout "1s"
               :onclick "hyprctl dispatch workspace ${ws.id}"
-              "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))
+              "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))))
+     (label :class "inactive" :text "•")
 ))
 
-(defwidget calendar_ []
+(defwidget calendar_widget []
   (box
-    :class "calendar"
+    :class "calendar_widget"
     :orientation "h"
     :valign "fill"
     :halign "fill"
@@ -301,5 +304,5 @@
                       :width "400px"
                       :height "100px"
                       :anchor "top right")
-  (calendar_))
+  (calendar_widget))
 
