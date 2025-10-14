@@ -35,23 +35,23 @@ TERM = "alacritty"
 size = 13
 
 [font.bold]
-family = "JetBrainsMono NF"
+family = "JetBrains Mono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono NF"
+family = "JetBrains Mono Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono NF"
+family = "JetBrains Mono Nerd Font"
 style = "Italic"
 
 #[font.monospace]
-#family = "JetBrainsMono NFM"
+#family = "JetBrains Mono Nerd FontM"
 #style = "Regular"
 
 [font.normal]
-family = "JetBrainsMono NF"
+family = "JetBrains Mono Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read _ ; do 
+socat -u UNIX-CONNECT:${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock - | while read _ ; do 
   ws=$(hyprctl monitors -j | jq '.[].activeWorkspace.id | tonumber')
   active_windows_addr=$(hyprctl workspaces -j | jq '[.[].lastwindow ]')
   active_windows_info=$(hyprctl clients -j | jq --argjson addr "$active_windows_addr" \

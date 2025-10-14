@@ -29,8 +29,7 @@ return {
         { "<leader>h",  vim.lsp.buf.hover,             desc ="LSP hover" },
     },
     config = function()
-        local lspconfig = require("lspconfig")
-        lspconfig["rust_analyzer"].setup({
+        vim.lsp.config("rust_analyzer",{
             capabilities = capabilities,
             settings = {
                 ["rust-analyzer"] = {
@@ -45,11 +44,12 @@ return {
                         enable = true
                     },
                     checkOnSave = { 
+                        enable = true,
                         command = "clippy" 
                     },
                 }
             }
         })
-        lspconfig["clangd"].setup{}
+        vim.lsp.enable("rust_analyzer")
     end,
 }

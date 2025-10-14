@@ -77,4 +77,9 @@ calendar.highlight {
 calendar:indeterminate {
   color: $black;
 }
+tooltip {
+  background-color: rgba($bg,0.96);
+  border: 2px solid rgba($cyan, 0.67);
+  border-radius: 8px;
+}
 

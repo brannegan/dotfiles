@@ -172,3 +172,21 @@ fi
 eval "$(zoxide init zsh)"
 #export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 #export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+# foot staff
+precmd() {
+    print -Pn "\e]133;A\e\\"
+}
+function precmd () {
+    if ! builtin zle; then
+        print -n "\e]133;D\e\\"
+    fi
+}
+function preexec () {
+    print -n "\e]133;C\e\\"
+}
+function clear-screen-keep-sb () {
+    print -n ${(pl:LINES-BUFFERLINES::\n:)}
+    zle .clear-screen
+}
+zle -N clear-screen clear-screen-keep-sb
+
