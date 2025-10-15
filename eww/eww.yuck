@@ -88,7 +88,7 @@
   (box :class "sysinfo" :orientation "h" :space-evenly false :halign "start"
     (box :class "meminfo" :orientation "h" :space-evenly false :halign "start"
         (button :timeout "1s" :class "hover txt"
-        :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config_location ~/.config/bottom/mem.toml"`
+        :onclick `hyprctl dispatch exec "footclient -a btop -T btop-mem btop -c ~/.config/btop/btop-mem.conf"`
         (box :class "mem-box-inner" :space-evenly false :spacing 3
           (label :text " ")
           (label :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
@@ -96,7 +96,7 @@
     (sep)
     (box :class "cpuinfo" :orientation "h" :space-evenly false :halign "start"
         (button :timeout "1s" :class "hover txt"
-        :onclick `hyprctl dispatch exec "alacritty --class btm,btm -e btm --config_location ~/.config/bottom/cpu.toml"`
+        :onclick `hyprctl dispatch exec "footclient -a btop -T btop-cpu btop -c ~/.config/btop/btop-cpu.conf"`
         (box :class "cpu-box-inner" :space-evenly false :spacing 3
           (label :text "󰻠 ")
           (label :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
