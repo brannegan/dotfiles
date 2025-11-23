@@ -60,7 +60,9 @@ setopt histreduceblanks
 setopt share_history
 setopt inc_append_history
 setopt hist_save_no_dups hist_ignore_dups       # eliminate duplicate entries in history
-setopt correctall 
+#setopt correctall 
+unsetopt correct_all
+
 
 ## Autocomplete initialization & automatic rehash & manual rehash.
 autoload -U compinit && compinit
