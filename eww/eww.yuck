@@ -270,6 +270,7 @@
         (button :class { ws.active ? "txt glyph" : "hover inactive glyph"} 
               :timeout "1s"
               :onclick "niri msg action focus-window --id ${ws.id}"
+              :tooltip "${ws.title}" 
               "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))))
      (label :class "inactive" :text "•")
 ))
