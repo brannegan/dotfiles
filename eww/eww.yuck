@@ -88,7 +88,7 @@
   (box :class "sysinfo" :orientation "h" :space-evenly false :halign "start"
     (box :class "meminfo" :orientation "h" :space-evenly false :halign "start"
         (button :timeout "1s" :class "hover txt"
-        :onclick `hyprctl dispatch exec "footclient -a btop -T btop-mem btop -c ~/.config/btop/btop-mem.conf"`
+        :onclick `niri msg action spawn -- footclient -a btop -T btop-mem btop -c ~/.config/btop/btop-mem.conf`
         (box :class "mem-box-inner" :space-evenly false :spacing 3
           (label :text " ")
           (label :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024/1024}")
@@ -96,7 +96,7 @@
     (sep)
     (box :class "cpuinfo" :orientation "h" :space-evenly false :halign "start"
         (button :timeout "1s" :class "hover txt"
-        :onclick `hyprctl dispatch exec "footclient -a btop -T btop-cpu btop -c ~/.config/btop/btop-cpu.conf"`
+        :onclick `niri msg action spawn -- footclient -a btop -T btop-cpu btop -c ~/.config/btop/btop-cpu.conf`
         (box :class "cpu-box-inner" :space-evenly false :spacing 3
           (label :text "󰻠 ")
           (label :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
@@ -121,7 +121,7 @@
       (box :space-evenly true
         (button :class "hover txt glyph" :onclick "systemctl suspend"  :tooltip "Suspend"     "")
         (button :class "hover txt glyph" :onclick "systemctl reboot"   :tooltip "Reboot"      "󰑓")
-        (button :class "hover txt glyph" :onclick "hyprctl dispatch exit 0" :tooltip "Logoff" "󰍃"))
+        (button :class "hover txt glyph" :onclick "niri msg action quit" :tooltip "Logoff" "󰍃"))
       (sep)
 )))
 
@@ -259,7 +259,7 @@
              " ${day}.${month}"))
 ))
 
-(deflisten wss_json "scripts/wss")
+(deflisten wss_json "scripts/wss_niri")
 (defwidget wss [] 
   (box :class "wss" :space-evenly false
     (box :space-evenly false 
@@ -268,7 +268,7 @@
         (label :class "inactive" :text "•")
         (button :class { ws.active ? "txt glyph" : "hover inactive glyph"} 
               :timeout "1s"
-              :onclick "hyprctl dispatch workspace ${ws.id}"
+              :onclick "niri msg action focus-window --id ${ws.id}"
               "${ icons[ws.class] != "null" ? icons[ws.class] : "?" }"))))
      (label :class "inactive" :text "•")
 ))

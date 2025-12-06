@@ -11,7 +11,7 @@ socat -u UNIX-CONNECT:${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.so
                                               then $w[] | select(.id == $id) 
                                               else {id: $id, class: "None", title: "None" } 
                                               end ]')
-  windows_with_vim=$(echo $windows_with_empty | jq '[ .[] | if .class == "Alacritty" and 
+  windows_with_vim=$(echo $windows_with_empty | jq '[ .[] | if .class == "footclient" and 
                                                               (.title | test("NVIM")) 
                                                            then {id, class: "Neovim", title } 
                                                            else . end ]')
