@@ -225,7 +225,8 @@
         :varname "reveal_wifi"
         :icon "${wifi_icon}"
         :transition "slideleft"
-        (button :class "hover txt glyph" :timeout "1s" :onclick "scripts/wifi toggle" "${wifi_icon}")
+        (button :class { wifi_icon == "󰖪" ? "hover glyph off" : "hover glyph txt" } :timeout "1s" 
+                :onclick "scripts/wifi toggle" "${wifi_icon}")
         (label :class "ssid" :text "${wifi_ssid}")
     )(sep)))
 

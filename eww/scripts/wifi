@@ -6,45 +6,47 @@ function strength {
 }
 
 function icon {
-    WIFI_STATUS=$(iwctl station wlan0 show | grep connected | awk '{print $2}')
+    WIFI_STATE=$(state)
     WIFI_STRENGTH=$(strength)
 
-    if [[ $WIFI_STATUS == 'connected' ]]; then
+    if [[ $WIFI_STATE == 'Power off' ]]; then echo '󰖪'; return; fi
+    if [[ $WIFI_STATE == 'Not connected' ]]; then echo '󱚼'; return; fi
+    if [[ $WIFI_STATE == 'Connected' ]]; then
         if [[ $WIFI_STRENGTH -ge 80 ]]; then echo '󰤨'; return; fi
         if [[ $WIFI_STRENGTH -ge 60 ]]; then echo '󰤥'; return; fi
         if [[ $WIFI_STRENGTH -ge 40 ]]; then echo '󰤢'; return; fi
         if [[ $WIFI_STRENGTH -ge 20 ]]; then echo '󰤟'; return; fi
         if [[ $WIFI_STRENGTH -ge  0 ]]; then echo '󰤯'; return; fi
     fi
-    if [[ $WIFI_STATUS != 'connected' ]]; then echo '󰤮'; return; fi
 }
 
 function ssid {
-    WIFI_STATUS=$(iwctl station wlan0 show | grep connected | awk '{print $2}')
-
-    if [[ $WIFI_STATUS == 'connected' ]]; then
+    WIFI_STATE=$(state)
+    if [[ $WIFI_STATE != 'Connected' ]]; then
+        echo $WIFI_STATE
+    else 
         echo $(iwctl station wlan0 show | grep 'Connected network' | awk '{print $3}')
-    else
-        echo 'Not Connected'
     fi
 }
 
 function state {
     WIFI_STATUS=$(iwctl station wlan0 show | grep connected | awk '{print $2}')
-    if [[ $WIFI_STATUS != 'connected' ]];  then echo "off"
-    else echo "on"; fi
+    if [[ $WIFI_STATUS == 'connected' ]];  then echo "Connected"; return; fi
+
+    WIFI_POWER=$(iwctl device wlan0 show | grep Powered | awk '{print $4}')
+    if [[ $WIFI_POWER != 'on' ]];  then echo "Power off"; return; fi
+
+    echo "Not connected"
 }
 
 function toggle {
-    STATE=$(iwctl device wlan0 show | grep Powered | awk '{print $4}')
-    if [[ $STATE == 'on' ]]; 
+    if [[ $(state) == 'Connected' ]]; 
     then 
         echo $(iwctl device wlan0 set-property Powered off);
     else 
         echo $(iwctl device wlan0 set-property Powered on); 
     fi
     eww update wifi_icon=$(icon)
-    #eww update wifi_state=$(state)
 }
 
 if [[ $1 == 'icon' ]]; then icon; fi
