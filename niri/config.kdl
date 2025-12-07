@@ -129,7 +129,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "footclient"; }
     Mod+S hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hypridle" { spawn "hypridle"; }
+    Ctrl+Shift+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     Mod+C { spawn-sh "cliphist list | fuzzel -d | cliphist decode | wl-copy -p"; }
     Mod+B { spawn "eww" "open" "--toggle" "bar"; }
