@@ -75,6 +75,9 @@ spawn-at-startup "eww" "open" "bar"
 spawn-at-startup "dunst"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "hypridle"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "text" "--primary" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 hotkey-overlay {
     skip-at-startup
@@ -113,6 +116,13 @@ window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
 }
+window-rule {
+    match app-id="btop"
+    opacity 0.8
+    open-floating true
+    default-column-width { fixed 960; }
+    default-window-height { fixed 620; }
+}
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -121,6 +131,7 @@ binds {
     Mod+S hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hypridle" { spawn "hypridle"; }
 
+    Mod+C { spawn-sh "cliphist list | fuzzel -d | cliphist decode | wl-copy -p"; }
     Mod+B { spawn "eww" "open" "--toggle" "bar"; }
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
@@ -236,7 +247,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
+    Mod+M { center-column; }
 
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
