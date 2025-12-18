@@ -6,7 +6,7 @@ function toggle {
     profile=$(echo $bt_hs | jq -r '.profile')
     if [[ $profile == 'a2dp-sink' ]]; 
     then 
-        pactl set-card-profile $name headset-head-unit-msbc
+        pactl set-card-profile $name headset-head-unit
     else 
         pactl set-card-profile $name a2dp-sink
     fi
