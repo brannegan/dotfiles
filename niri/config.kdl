@@ -90,9 +90,19 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {}
 
 // Open the Firefox picture-in-picture player as floating by default.
+workspace "browser"
+
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"#
+    open-on-workspace "browser"
+}
+
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is k"firefox"k)
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
@@ -269,6 +279,7 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { spawn "~/.local/bin/videos.sh"; }
+    Mod+W       { spawn "~/.local/bin/browser.sh"; }
     // Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 

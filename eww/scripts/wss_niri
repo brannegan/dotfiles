@@ -3,12 +3,12 @@
 niri msg event-stream | while read _ ; do 
     active_ws=$(niri msg --json workspaces | jq 'map(select(.is_active)) | .[].id');
     windows_in_active_ws=$(niri msg -j windows | jq "map(select(.workspace_id == $active_ws)) 
-                                               | sort_by(.layout.pos_in_scrolling_layout) 
-                                               | map({id,\"class\": if .title | test(\"Nvim\") 
-                                                                    then \"Neovim\" 
-                                                                    else .app_id end, 
-                                                                    title, 
-                                                                    \"active\": .is_focused})")
+                            | sort_by(.layout.pos_in_scrolling_layout) 
+                            | map({id,\"class\": 
+                            if .title | test(\"Nvim\") then \"Neovim\" 
+                            elif .title | test(\"YouTube —\")  then \"youtube\"
+                            elif .title | test(\"Home Assistant —\") then \"home-assistant\"
+                            else .app_id end, title, \"active\": .is_focused})")
     echo $windows_in_active_ws
 done
 
