@@ -11,7 +11,7 @@ return {
         { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", 
            config = true,
            keys = {
-               { "<leader>d", 
+               { "<leader>dd", 
                  "<cmd>lua require('lsp_lines').toggle()<CR>", 
                  desc = "Toggle lsp_lines" }
            }
@@ -19,14 +19,14 @@ return {
         { "j-hui/fidget.nvim", config = true },
     },
     keys = {
-        { "<F1>",       vim.lsp.buf.formatting,        desc ="LSP formatting" },
-        { "<F2>",       vim.lsp.buf.rename,            desc ="LSP rename"},
-        { "gd",         vim.lsp.buf.definition,        desc ="LSP definition" },
-        { "gt",         vim.lsp.buf.type_definition,   desc ="LSP type definition" },
-        { "<leader>a",  vim.lsp.buf.code_action,       desc ="LSP code action" },
-        { "<leader>rf", vim.lsp.buf.format,            desc ="LSP format buffer" },
-        { "<leader>aa", vim.lsp.buf.range_code_action, desc ="LSP range code action" },
-        { "<leader>h",  vim.lsp.buf.hover,             desc ="LSP hover" },
+--        { "<F2>",       vim.lsp.buf.rename,            desc ="LSP rename"},
+--        { "gd",         vim.lsp.buf.definition,        desc ="LSP definition" },
+--        { "gt",         vim.lsp.buf.type_definition,   desc ="LSP type definition" },
+--        { "<leader>a",  vim.lsp.buf.code_action,       desc ="LSP code action" },
+--        { "<leader>aa", vim.lsp.buf.range_code_action, desc ="LSP range code action" },
+        { "grf", vim.lsp.buf.format,            desc ="vim.lsp.buf.format" },
+        { "grh", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+                                                       desc ="LSP inlay hints toggle" },
     },
     config = function()
         vim.lsp.config("rust_analyzer",{

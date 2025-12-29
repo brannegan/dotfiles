@@ -20,6 +20,11 @@ input {
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     // focus-follows-mouse max-scroll-amount="0%"
 }
+environment {
+    QT_QPA_PLATFORM "wayland"
+    KRITA_USE_NATIVE_CANVAS_SURFACE "1"
+    DISPLAY null
+}
 
 /-output "eDP-1" {
     mode "1920x1080@120.030"

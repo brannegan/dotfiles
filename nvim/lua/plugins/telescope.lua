@@ -13,7 +13,7 @@ return { 'nvim-telescope/telescope.nvim',
         {'<leader>re', "<cmd>Telescope lsp_references<CR>", desc = "Telescope"},
         {'<leader>i',  "<cmd>Telescope lsp_implementations<CR>", desc = "Telescope"},
         {'<leader>sy', "<cmd>Telescope lsp_document_symbols<CR>", desc = "Telescope"},
-        {'<leader>q',  "<cmd>Telescope diagnostics<CR>", desc = "Telescope"},
+        {'<leader>d',  "<cmd>Telescope diagnostics<CR>", desc = "Telescope"},
     },
     config = function()
         local actions = require 'telescope.actions'

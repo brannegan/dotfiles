@@ -11,6 +11,7 @@ if command -v exa >/dev/null 2>&1; then
   alias la="eza --long --all --group-directories-first"
   alias lart="eza --long --all --group-directories-first --sort modified"
   alias lat="eza --long --all --tree --level 3 --git-ignore"
+  alias lt="eza --long --tree --level 3 --git-ignore"
 else
   alias ls="LC_COLLATE=C ls --color=auto -hF --group-directories-first"
   alias la="ls -A"
