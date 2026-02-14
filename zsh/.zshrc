@@ -192,3 +192,7 @@ function clear-screen-keep-sb () {
 }
 zle -N clear-screen clear-screen-keep-sb
 
+function ddg() {
+    local query=$(printf '%s' "$*" | sed 's/ /+/g')
+    w3m "https://duckduckgo.com/?kp=-1&kl=wt-wt&q=$query"
+}

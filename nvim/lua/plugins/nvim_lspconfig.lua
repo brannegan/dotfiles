@@ -1,13 +1,13 @@
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+--capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 return { 
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { 
         'nvim-telescope/telescope.nvim',
-        "hrsh7th/cmp-nvim-lsp",
+--        "hrsh7th/cmp-nvim-lsp",
         { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", 
            config = true,
            keys = {
@@ -20,7 +20,7 @@ return {
     },
     keys = {
 --        { "<F2>",       vim.lsp.buf.rename,            desc ="LSP rename"},
---        { "gd",         vim.lsp.buf.definition,        desc ="LSP definition" },
+        { "gd",         vim.lsp.buf.definition,        desc ="vim.lsp.buf.definition" },
 --        { "gt",         vim.lsp.buf.type_definition,   desc ="LSP type definition" },
 --        { "<leader>a",  vim.lsp.buf.code_action,       desc ="LSP code action" },
 --        { "<leader>aa", vim.lsp.buf.range_code_action, desc ="LSP range code action" },

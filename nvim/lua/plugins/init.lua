@@ -13,10 +13,10 @@ return {
     { 'echasnovski/mini.ai', version = false, config = true },
     { 'echasnovski/mini.pairs', version = false, config = true },
     { 'echasnovski/mini.surround', version = false, config = true },
+    { 'echasnovski/mini.comment', version = false, config = true },
     { 'tversteeg/registers.nvim', config = true },
     { 'NvChad/nvim-colorizer.lua', config = true },
     { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow'},
-    { 'L3MON4D3/LuaSnip' },
     { 'nvim-treesitter/nvim-treesitter-context',
         opts = {
             multiline_treshold=5,

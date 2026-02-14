@@ -17,8 +17,6 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
 -- Lsp
 vim.keymap.set('n', '<leader>ru', '<cmd>RustRunnables<CR>')
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
 --vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.open_float(nil, {scope = "line"}) end)
 
 
