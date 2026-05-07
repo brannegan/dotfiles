@@ -2,7 +2,7 @@
 ## Aliases.
 alias colordiff=~/bin/colordiff
 ##alias tmux="tmux -f ~/.config/tmux/tmux.conf"
-alias sudo="sudo "
+alias sudo="sudo -E "
 alias mpvf='mpv "$(fzf -q Videos/)"'
 alias reload-shell="exec /proc/self/exe --login"
 if command -v exa >/dev/null 2>&1; then
@@ -33,6 +33,4 @@ alias gps='git push'
 alias gt='git tag'
 alias gch='git checkout'
 
-alias cd="cd >/dev/null"
 
-alias nnn='nnn -HUde'

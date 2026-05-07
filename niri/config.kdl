@@ -22,8 +22,8 @@ input {
 }
 environment {
     QT_QPA_PLATFORM "wayland"
+    GDK_BACKEND "wayland"
     KRITA_USE_NATIVE_CANVAS_SURFACE "1"
-    DISPLAY null
 }
 
 /-output "eDP-1" {
@@ -111,6 +111,10 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
 // Example: block out two password managers from screen capture.
@@ -288,7 +292,7 @@ binds {
     // Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-    Print { screenshot; }
+    Mod+G { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
